@@ -1,0 +1,14 @@
+{
+  "name": "fullstack-app",
+  "version": "1.0.0",
+  "description": "Run both front-end and back-end servers",
+  "scripts": {
+    "start": "concurrently \"npm run start --prefix ./backend\" \"npm run start --prefix ./frontend\"",
+    "install:dependencies": "concurrently \"npm install --prefix ./backend\" \"npm install --prefix ./frontend\"",
+    "install:prisma:generate": "npx prisma generate --schema=./backend/src/database/prisma/schema.prisma",
+    "setupDatabaseForOperations": "node .\\backend\\src\\database\\databaseOperations\\setupDatabaseForOperations.js"
+  },
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}

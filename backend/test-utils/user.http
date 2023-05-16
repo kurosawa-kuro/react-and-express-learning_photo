@@ -1,0 +1,29 @@
+### Register a new user
+POST http://localhost:8080/register
+Content-Type: application/json
+
+{
+    "name": "Test User",
+    "password": "password123",
+    "email": "test@example.com",
+    "isAdmin": false
+}
+
+### Login a user
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+    "email": "test@example.com",
+    "password": "password123"
+}
+
+### Access a protected route
+### Before sending this request, replace YOUR_TOKEN_HERE with the JWT you received when logging in.
+GET http://localhost:8080/protected
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE2ODQwMjk4MjQsImV4cCI6MTY4NDExNjIyNH0.RpbD3jkRCm0oxnNcE6U8MVR4yGgN5IlYtr-B2dNb-J8"
+
+###
+
+GET http://localhost:8080/me
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJUZXN0IFVzZXIiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE2ODQwMjk4MjQsImV4cCI6MTY4NDExNjIyNH0.RpbD3jkRCm0oxnNcE6U8MVR4yGgN5IlYtr-B2dNb-J8"

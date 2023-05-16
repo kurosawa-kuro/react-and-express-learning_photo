@@ -1,0 +1,121 @@
+// Path: ./prisma/schema.prisma
+
+// provider     = "mysql"
+// relationMode = "prisma"
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Item {
+  id   Int     @id @default(autoincrement())
+  name String?
+}
+
+model User {
+  id                    Int            @id @default(autoincrement())
+  name                  String         @unique
+  password              String
+  email                 String         @unique
+  isAdmin               Boolean        @default(false)
+  createdAt             DateTime       @default(now())
+  updatedAt             DateTime       @default(now())
+  posts                 Post[]
+  comments              Comment[]
+  following             UserFollower[] @relation("UserFollowing")
+  followers             UserFollower[] @relation("UserFollowers")
+  receivedNotifications Notification[] @relation("NotificationRecipient")
+  sentNotifications     Notification[] @relation("NotificationSender")
+}
+
+model Post {
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  title         String         @default("No Title")
+  image         String         @default("https://www.shoshinsha-design.com/wp-content/uploads/2020/05/noimage-760x460.png")
+  originalName  String         @default("sample.jpg")
+  comment       String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id])
+  comments      Comment[]
+  tags          PostTag[]
+  notifications Notification[]
+
+  @@unique([userId, id])
+}
+
+model Comment {
+  id            Int            @id @default(autoincrement())
+  userId        Int
+  postId        Int
+  comment       String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id])
+  post          Post           @relation(fields: [postId], references: [id])
+  notifications Notification[]
+
+  @@unique([userId, postId, id])
+  @@index([postId])
+}
+
+model Tag {
+  id        Int       @id @default(autoincrement())
+  name      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  posts     PostTag[]
+}
+
+model PostTag {
+  id         Int      @id @default(autoincrement())
+  postId     Int
+  tagId      Int
+  post       Post     @relation(fields: [postId], references: [id])
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  assignedAt DateTime @default(now())
+
+  @@unique([postId, tagId])
+  @@index([tagId])
+}
+
+model UserFollower {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  followerId Int
+  user       User     @relation("UserFollowing", fields: [userId], references: [id])
+  follower   User     @relation("UserFollowers", fields: [followerId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@unique([userId, followerId])
+  @@index([followerId])
+}
+
+// 一意のID、受信者ID、タイプ、投稿ID、コメントID、送信者ID、既読状態、
+// 作成日時を持ち、送信者、投稿、コメント、受信者
+model Notification {
+  id          Int      @id @default(autoincrement())
+  recipientId Int
+  type        String
+  postId      Int?
+  commentId   Int?
+  senderId    Int?
+  isRead      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  recipient   User     @relation("NotificationRecipient", fields: [recipientId], references: [id])
+  sender      User?    @relation("NotificationSender", fields: [senderId], references: [id])
+  post        Post?    @relation(fields: [postId], references: [id])
+  comment     Comment? @relation(fields: [commentId], references: [id])
+
+  @@index([recipientId])
+  @@index([senderId])
+  @@index([postId])
+  @@index([commentId])
+}

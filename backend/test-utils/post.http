@@ -1,0 +1,49 @@
+### Get Posts (page 1)
+GET http://localhost:8080/posts?page=1
+Content-Type: application/json
+
+###
+
+### Get Posts (page 2)
+GET http://localhost:8080/posts?page=2
+Content-Type: application/json
+
+###
+
+### Get Posts (page 1 with search)
+GET http://localhost:8080/posts?page=1&search=b
+Content-Type: application/json
+
+###
+
+### Get Posts (page 2 with search)
+GET http://localhost:8080/posts?page=2&search=query
+Content-Type: application/json
+
+###
+
+
+### Create a new Post
+POST http://localhost:8080/posts
+Content-Type: multipart/form-data; boundary=BoundaryString
+
+--BoundaryString
+Content-Disposition: form-data; name="userId"
+
+1
+--BoundaryString
+Content-Disposition: form-data; name="title"
+
+Sample Post Title
+--BoundaryString
+Content-Disposition: form-data; name="comment"
+
+This is a sample comment.
+--BoundaryString
+Content-Disposition: form-data; name="image"; filename="sample.jpg"
+Content-Type: image/jpeg
+
+< /path/to/your/image/sample.jpg
+--BoundaryString--
+
+###
