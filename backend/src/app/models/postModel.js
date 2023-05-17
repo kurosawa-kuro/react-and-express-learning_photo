@@ -1,5 +1,3 @@
-// Path: backend/src/app/models/postModel.js
-
 import { db } from "../../database/prisma/prismaClient.js";
 
 export const POSTS_PER_PAGE = 3;  // adjust this as needed
@@ -54,6 +52,9 @@ export const getTotalPosts = async (search) => {
 };
 
 export const createNewPost = async (postData) => {
+    if (isNaN(parseInt(postData.userId))) {
+        throw new Error('Invalid user ID');
+    }
     const newPost = await db.post.create({
         data: {
             ...postData,

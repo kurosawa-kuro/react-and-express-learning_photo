@@ -25,12 +25,7 @@ export const createNewPostController = asyncHandler(async (req, res) => {
     console.log("hit createNewPostController");
     console.log("req.files", req.files);
 
-    const newPostData = {
-        ...req.body,
-    };
-    const newPost = await createNewPost(newPostData);
-    console.log("newPost", newPost);
-
+    const newPost = await createNewPost(req.body);
     const postImages = req.files.map((file, index) => ({
         postId: newPost.id,
         imagePath: file.filename,
@@ -39,16 +34,21 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 
     await createPostImages(postImages);
 
-    res.status(201).json("res from createNewPostController");
+    res.status(201).json({ message: 'Post created successfully', data: newPost });
 });
 
 export const updatePostController = asyncHandler(async (req, res) => {
+    if (isNaN(parseInt(req.params.id))) {
+        throw new Error('Invalid post ID');
+    }
     const postId = parseInt(req.params.id);
-    const updatedPostData = {
-        ...req.body,
-    };
+    const updatedPostData = { ...req.body };
 
+    if (isNaN(parseInt(updatedPostData.userId))) {
+        throw new Error('Invalid user ID');
+    }
     updatedPostData.userId = parseInt(updatedPostData.userId);
+
     const updatedPost = await updatePost(postId, updatedPostData);
 
     const postImages = req.files.map((file, index) => ({
@@ -59,5 +59,5 @@ export const updatePostController = asyncHandler(async (req, res) => {
 
     await updatePostImages(postId, postImages);
 
-    res.status(200).json("res from updatePostController");
+    res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
 });
