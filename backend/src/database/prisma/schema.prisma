@@ -38,8 +38,6 @@ model Post {
   id            Int            @id @default(autoincrement())
   userId        Int
   title         String         @default("No Title")
-  image         String         @default("https://www.shoshinsha-design.com/wp-content/uploads/2020/05/noimage-760x460.png")
-  originalName  String         @default("sample.jpg")
   comment       String?
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @default(now())
