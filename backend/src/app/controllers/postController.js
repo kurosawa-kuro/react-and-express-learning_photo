@@ -43,11 +43,11 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 });
 
 export const updatePostController = asyncHandler(async (req, res) => {
-    const postId = req.params.id;
+    const postId = parseInt(req.params.id);
     const updatedPostData = {
         ...req.body,
     };
-    console.log("updatedPostData", updatedPostData);
+
     updatedPostData.userId = parseInt(updatedPostData.userId);
     const updatedPost = await updatePost(postId, updatedPostData);
 

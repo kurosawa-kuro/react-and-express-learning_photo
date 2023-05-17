@@ -61,7 +61,7 @@ export const createNewPost = async (postData) => {
 
 export const updatePost = async (id, postData) => {
     return await db.post.update({
-        where: { id: parseInt(id) },
+        where: { id },
         data: postData,
     });
 };
