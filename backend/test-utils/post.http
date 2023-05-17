@@ -23,9 +23,10 @@ Content-Type: application/json
 ###
 
 
-### Create a new Post
+### Create a new Post with multiple images
 POST http://localhost:8080/posts
 Content-Type: multipart/form-data; boundary=BoundaryString
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDIzMzUxOSwiZXhwIjoxNjg0MzE5OTE5fQ.Q8THa7GQDhTylja6h8jRQVSlNvQkc5CGEEdyuQT0Hs4"
 
 --BoundaryString
 Content-Disposition: form-data; name="userId"
@@ -40,10 +41,15 @@ Content-Disposition: form-data; name="comment"
 
 This is a sample comment.
 --BoundaryString
-Content-Disposition: form-data; name="image"; filename="sample.jpg"
+Content-Disposition: form-data; name="images"; filename="sample1.jpg"
 Content-Type: image/jpeg
 
-< /path/to/your/image/sample.jpg
+< /path/to/your/image/sample1.jpg
+--BoundaryString
+Content-Disposition: form-data; name="images"; filename="sample2.jpg"
+Content-Type: image/jpeg
+
+< /path/to/your/image/sample2.jpg
 --BoundaryString--
 
 ###

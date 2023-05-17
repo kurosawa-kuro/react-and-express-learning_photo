@@ -10,8 +10,8 @@ const postRoutes = (app) => {
     // Add the authMiddleware to the route to ensure only authenticated users can get posts
     app.get("/posts", authMiddleware, asyncHandler(getAllPostsController));
 
-    // Create a new post
-    app.post("/posts", authMiddleware, upload.single('image'), asyncHandler(createNewPostController));
+    // Create a new post with multiple images
+    app.post("/posts", authMiddleware, upload.array('images', 10), asyncHandler(createNewPostController));
 };
 
 

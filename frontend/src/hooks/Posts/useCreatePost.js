@@ -1,9 +1,10 @@
 // src/hooks/useCreatePost.js
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPost } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
-export const useCreatePost = (setTitle, setImage, setComment, setError, title, image, comment) => {
+export const useCreatePost = (setTitle, setImages, setComment, setError, title, images, comment) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
@@ -11,7 +12,11 @@ export const useCreatePost = (setTitle, setImage, setComment, setError, title, i
         e.preventDefault();
         const formData = new FormData();
         formData.append('title', title);
-        formData.append('image', image);
+        // Append images array to FormData
+        images.forEach((image, index) => {
+            formData.append(`images[${index}]`, image);
+            formData.append(`display_order[${index}]`, index + 1);
+        });
         formData.append('comment', comment);
 
         // userIdはログインシステムに基づいて変更してください
@@ -24,7 +29,7 @@ export const useCreatePost = (setTitle, setImage, setComment, setError, title, i
         onSuccess: () => {
             // Clear form data
             setTitle('');
-            setImage(null);
+            setImages([]);
             setComment('');
             setError('');
             queryClient.invalidateQueries(['posts']);
