@@ -46,9 +46,20 @@ model Post {
   user          User           @relation(fields: [userId], references: [id])
   comments      Comment[]
   tags          PostTag[]
+  images        PostImage[] // 新たに追加
   notifications Notification[]
 
   @@unique([userId, id])
+}
+
+model PostImage {
+  id           Int    @id @default(autoincrement())
+  postId       Int
+  imagePath    String
+  displayOrder Int?
+  post         Post   @relation(fields: [postId], references: [id])
+
+  @@index([postId])
 }
 
 model Comment {
