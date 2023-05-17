@@ -1,46 +1,47 @@
 // Path: backend/src/app/models/userModel.js
 
-import bcyptjs from "bcryptjs";
+import bcrypt from "bcryptjs";
 import { db } from "../../database/prisma/prismaClient.js";
 
 export const createUser = async ({ name, password, email, isAdmin }) => {
+    const hashedPassword = await hashPassword(password);
     const newUser = await db.user.create({
-        data: { name, password: await bcyptjs.hash(password, 10), email, isAdmin },
+        data: { name, password: hashedPassword, email, isAdmin },
     });
 
-    return newUser;
+    return omitPassword(newUser);
 };
 
-export async function getUserByEmail(email) {
+export const getUserByEmail = async (email) => {
     const user = await db.user.findUnique({ where: { email } });
-    return user;
+    return user ? omitPassword(user) : null;
 };
 
-export async function loginUser(email, password) {
-    if (!email || !password) {
-        throw new Error("Email and password are required");
-    }
+export const loginUser = async (email, password) => {
+    const user = await db.user.findUnique({ where: { email } });
 
-    // Check if user exists
-    const existingUser = await getUserByEmail(email);
-    if (!existingUser) {
+    if (!user) {
         throw new Error("User does not exist");
     }
 
-    // Check if password is correct
-    const isPasswordCorrect = await bcyptjs.compare(password, existingUser.password);
+    const isPasswordCorrect = await bcrypt.compare(password, user.password);
     if (!isPasswordCorrect) {
         throw new Error("Password is incorrect");
     }
 
-    return existingUser;
+    return omitPassword(user);
 }
 
-// getUserById
-export async function getUserById(id) {
-    if (!id) {
-        throw new Error("ID is required");
-    }
-
-    return await db.user.findUnique({ where: { id } });
+export const getUserById = async (id) => {
+    const user = await db.user.findUnique({ where: { id } });
+    return user ? omitPassword(user) : null;
 }
+
+const hashPassword = async (password) => {
+    return await bcrypt.hash(password, 10);
+};
+
+const omitPassword = (user) => {
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+};
