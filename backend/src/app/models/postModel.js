@@ -58,3 +58,10 @@ export const createNewPost = async (postData) => {
     });
     return newPost;
 };
+
+export const updatePost = async (id, postData) => {
+    return await db.post.update({
+        where: { id: parseInt(id) },
+        data: postData,
+    });
+};

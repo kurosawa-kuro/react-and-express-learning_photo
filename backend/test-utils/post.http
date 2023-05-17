@@ -53,3 +53,34 @@ Content-Type: image/jpeg
 --BoundaryString--
 
 ###
+
+### Update a Post with multiple images
+PUT http://localhost:8080/posts/12
+Content-Type: multipart/form-data; boundary=BoundaryString
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDIzMzUxOSwiZXhwIjoxNjg0MzE5OTE5fQ.Q8THa7GQDhTylja6h8jRQVSlNvQkc5CGEEdyuQT0Hs4"
+
+--BoundaryString
+Content-Disposition: form-data; name="userId"
+
+1
+--BoundaryString
+Content-Disposition: form-data; name="title"
+
+Updated Sample Post Title
+--BoundaryString
+Content-Disposition: form-data; name="comment"
+
+This is an updated sample comment.
+--BoundaryString
+Content-Disposition: form-data; name="images"; filename="updated_sample1.jpg"
+Content-Type: image/jpeg
+
+< /path/to/your/image/updated_sample1.jpg
+--BoundaryString
+Content-Disposition: form-data; name="images"; filename="updated_sample2.jpg"
+Content-Type: image/jpeg
+
+< /path/to/your/image/updated_sample2.jpg
+--BoundaryString--
+
+###
