@@ -24,7 +24,10 @@ const Home = () => {
                 <div className='post' key={post.id}>
                     <h2>{post.title}</h2>
                     <div className='post-info'>
-                        <img src={"http://localhost:8080/uploads/" + post.image} alt={post.title} />
+                        {/* imagesの存在と長さを確認します */}
+                        {post.images && post.images.length > 0 && (
+                            <img src={"http://localhost:8080/uploads/" + post.images[0].imagePath} alt={post.title} />
+                        )}
                         <p>{post.comment}</p>
                     </div>
                 </div>
