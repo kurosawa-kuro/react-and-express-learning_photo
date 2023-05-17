@@ -25,6 +25,10 @@ export const getPaginatedPosts = async (page, search) => {
                 },
             ],
         },
+        include: {
+            user: true, // Include related User
+            images: true // Include related PostImage
+        }
     });
     return posts;
 };
