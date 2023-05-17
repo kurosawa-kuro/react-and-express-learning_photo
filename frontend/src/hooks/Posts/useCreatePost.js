@@ -13,11 +13,13 @@ export const useCreatePost = (setTitle, setImages, setComment, setError, title, 
         const formData = new FormData();
         formData.append('title', title);
         // Append images array to FormData
-        images.forEach((image, index) => {
-            formData.append(`images[${index}]`, image);
-            formData.append(`display_order[${index}]`, index + 1);
+        // images.forEach((image, index) => {
+        images.forEach((image) => {
+            formData.append("images", image);
         });
+        // });
         formData.append('comment', comment);
+
 
         // userIdはログインシステムに基づいて変更してください
         formData.append('userId', 1);

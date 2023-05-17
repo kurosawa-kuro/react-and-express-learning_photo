@@ -19,7 +19,7 @@ export const getUserByEmail = async (email) => {
 
 export const loginUser = async (email, password) => {
     const user = await db.user.findUnique({ where: { email } });
-
+    console.log("user", user);
     if (!user) {
         throw new Error("User does not exist");
     }
