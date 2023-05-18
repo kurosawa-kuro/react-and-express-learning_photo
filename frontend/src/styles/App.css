@@ -1,5 +1,3 @@
-/* path styles/App.css */
-
 :root {
   --main-bg-color: #f5f5f5;
   --container-bg-color: #fff;
@@ -17,11 +15,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: var(--main-bg-color);
-}
-
 .container {
   max-width: 800px;
   margin: 10px auto 0 auto;
@@ -30,116 +23,14 @@ body {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-h1,
-h2,
-h3 {
-  line-height: 1;
-  text-align: center;
-}
-
-h1 {
-  font-size: 48px;
-  color: var(--primary-text-color);
-  margin-bottom: 20px;
-}
-
-h2 {
-  font-size: 36px;
-  color: var(--secondary-text-color);
-  line-height: 1.333;
-  margin-bottom: 10px;
-}
-
-h3 {
-  font-size: 24px;
-  color: var(--secondary-text-color);
-}
-
 .App-header {
   text-align: center;
   margin-bottom: 40px;
 }
 
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-}
-
-form div {
-  width: 100%;
-}
-
-input,
-button {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-input {
-  border: 1px solid var(--input-border-color);
-  margin-top: 5px;
-}
-
-::placeholder {
-  text-align: left;
-}
-
-button {
-  border: none;
-  flex: 1 1 20%;
-  background-color: var(--button-bg-color);
-  color: #fff;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: var(--button-hover-bg-color);
-}
-
 .error {
   color: var(--error-color);
   margin-top: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  background-color: var(--list-bg-color);
-  border: 1px solid var(--list-border-color);
-  border-radius: 4px;
-  margin-bottom: 10px;
-}
-
-nav ul {
-  display: flex;
-  justify-content: center;
-}
-
-nav ul li {
-  margin: 10px;
-}
-
-img {
-  height: 150px;
-}
-
-.post {
-  background-color: var(--main-bg-color);
-  margin-bottom: 10px;
-  padding: 20px;
-}
-
-.post-info {
-  display: flex;
-  gap: 10px;
 }
 
 .button-link {
@@ -156,7 +47,6 @@ img {
   background-color: var(--button-hover-bg-color);
 }
 
-/* Add this new style */
 .button-link.inactive {
   opacity: 0.3;
   pointer-events: none;
@@ -226,8 +116,175 @@ img {
   color: var(--button-hover-bg-color);
 }
 
+.post-card {
+  background-color: var(--main-bg-color);
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
 .post-sentence {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+}
+
+.post-container {
+  background-color: var(--main-bg-color);
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.post-content {
+  display: flex;
+  gap: 10px;
+}
+
+.post-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.post-actions a {
+  text-decoration: none;
+}
+
+.post-actions a :hover {
+  color: var(--button-hover-bg-color);
+}
+
+.post-description {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flash-message-container {
+  padding: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: white;
+  background-color: green;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.pagination-controls {
+  display: flex;
+  gap: 10px;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 30px;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--main-bg-color);
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1;
+  text-align: center;
+}
+
+h1 {
+  font-size: 48px;
+  color: var(--primary-text-color);
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 36px;
+  color: var(--secondary-text-color);
+  line-height: 1.333;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 24px;
+  color: var(--secondary-text-color);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+form div {
+  width: 100%;
+}
+
+input,
+button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+input {
+  border: 1px solid var(--input-border-color);
+  margin-top: 5px;
+}
+
+::placeholder {
+  text-align: left;
+}
+
+button {
+  border: none;
+  flex: 1 1 20%;
+  background-color: var(--button-bg-color);
+  color: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--button-hover-bg-color);
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: var(--list-bg-color);
+  border: 1px solid var(--list-border-color);
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+}
+
+nav ul li {
+  margin: 10px;
+}
+
+img {
+  height: 150px;
+}
+
+.post {
+  background-color: var(--main-bg-color);
+  margin-bottom: 10px;
+  padding: 20px;
+}
+
+.post-info {
+  display: flex;
   gap: 10px;
 }

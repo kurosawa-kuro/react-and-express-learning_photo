@@ -13,7 +13,8 @@ const Single = () => {
 
     return (
         <div>
-            <h1>{data.title}</h1>
+            <h1>Show</h1>
+            <h2>{data.title}</h2>
             <div className='single-photo-info'>
                 <div>
                     {data.images && data.images.map((image, index) => (
