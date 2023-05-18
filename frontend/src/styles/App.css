@@ -179,3 +179,19 @@ img {
   margin: 0 auto;
   margin-top: 30px;
 }
+
+.single-photo-info {
+  display: flex;
+  gap: 10px;
+}
+
+.single-photo-info img {
+  height: 300px;
+  width: 300px;
+  object-fit: cover;
+}
+
+.single-photo-info p {
+  width: 450px;
+  overflow-wrap: break-word;
+}

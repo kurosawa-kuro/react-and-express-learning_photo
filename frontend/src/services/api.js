@@ -25,3 +25,9 @@ export const fetchPosts = async (page = 1, search = '') => {
     const { data } = await apiClient.get(`/posts?page=${page}&search=${search}`);
     return data;
 };
+
+export const fetchSinglePost = async (id) => {
+    const apiClient = getApiClient();
+    const { data } = await apiClient.get(`/posts/${id}`);
+    return data;
+};

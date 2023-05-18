@@ -72,3 +72,19 @@ export const updatePost = async (id, postData) => {
         data: postData,
     });
 };
+
+export const getSinglePost = async (id) => {
+    const post = await db.post.findFirst({
+        where: { id },
+        include: {
+            user: true, // Include related User
+            images: true // Include related PostImage
+        }
+    });
+
+    if (!post) {
+        throw new Error('Post not found');
+    }
+
+    return post;
+};

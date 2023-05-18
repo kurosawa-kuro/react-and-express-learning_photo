@@ -1,7 +1,7 @@
 // Path: backend/src/app/controllers/postController.js
 
 import asyncHandler from "express-async-handler";
-import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost } from "../models/postModel.js";
+import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost, getSinglePost } from "../models/postModel.js";
 import { createPostImages, updatePostImages } from "../models/postImageModel.js";
 
 export const getAllPostsController = asyncHandler(async (req, res) => {
@@ -23,7 +23,7 @@ export const getAllPostsController = asyncHandler(async (req, res) => {
 
 export const createNewPostController = asyncHandler(async (req, res) => {
     console.log("hit createNewPostController");
-    console.log("req.files", req.files);
+    // console.log("req.files", req.files);
 
     const newPost = await createNewPost(req.body);
     const postImages = req.files.map((file, index) => ({
@@ -60,4 +60,12 @@ export const updatePostController = asyncHandler(async (req, res) => {
     await updatePostImages(postId, postImages);
 
     res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
+});
+
+export const getSinglePostController = asyncHandler(async (req, res) => {
+    const id = parseInt(req.params.id);
+
+    const post = await getSinglePost(id);
+
+    res.json(post);
 });
