@@ -14,6 +14,7 @@ const Edit = () => {
     const [error, setError] = useState('');
 
     const { data: post } = useFetchSinglePost(id);
+    console.log({ post });
     useUserAuthentication();
     const { handleSubmit, ...updatePost } = useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment);
 
