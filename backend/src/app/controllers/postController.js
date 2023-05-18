@@ -47,11 +47,9 @@ export const updatePostController = asyncHandler(async (req, res) => {
         throw new Error('Invalid post ID');
     }
     const postId = parseInt(req.params.id);
-    console.log("req.body.images", req.body.images);
-    // const test = req.body.images[0].imagePath;
-    // console.log("test", test);
-    console.log("req.body.images", req.body.images);
-
+    // console.log("req.body.images", req.body.images);
+    // console.log("req.body.images[0]", req.body.images[0].id);
+    const imagesList = req.body.images;
 
     delete req.body.images;
     const updatedPostData = { ...req.body };
@@ -65,13 +63,15 @@ export const updatePostController = asyncHandler(async (req, res) => {
     // const newPost = await createNewPost(req.body);
     const updatedPost = await updatePost(postId, updatedPostData);
 
-    const postImages = req.files.map((file, index) => ({
+    const postImages = imagesList.map((file, index) => ({
+        // id: file.id,
         postId: updatedPost.id,
-        imagePath: file.filename,
-        displayOrder: index + 1,
+        imagePath: file.image,
+        displayOrder: parseInt(file.displayOrder),
     }));
+    console.log({ postImages });
 
-    // await updatePostImages(postId, postImages);
+    await updatePostImages(postId, postImages);
 
     res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
 });
