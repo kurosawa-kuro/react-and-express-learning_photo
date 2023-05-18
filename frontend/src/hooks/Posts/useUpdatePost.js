@@ -12,6 +12,7 @@ export const useUpdatePost = (id, setTitle, setImages, setComment, setError, tit
         e.preventDefault();
         const formData = new FormData();
         formData.append('title', title);
+        console.log({ images });
         images.forEach((image) => {
             formData.append("images", image);
         });
