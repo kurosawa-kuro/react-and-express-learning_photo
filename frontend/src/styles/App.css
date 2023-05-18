@@ -206,3 +206,28 @@ img {
   height: 250px;
   object-fit: cover;
 }
+
+.title-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.action-list {
+  display: flex;
+  gap: 10px;
+}
+
+.action-list a {
+  text-decoration: none;
+}
+
+.action-list a :hover {
+  color: var(--button-hover-bg-color);
+}
+
+.post-sentence {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}

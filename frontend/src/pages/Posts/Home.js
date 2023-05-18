@@ -22,15 +22,22 @@ const Home = () => {
             <input type="text" value={search} onChange={handleSearchChange} placeholder="Search..." />
             {data && data.data.map((post) => (
                 <div className='post' key={post.id}>
-                    <h2>
-                        <Link to={`/post/${post.id}`}>{post.title}</Link> {/* Singleへのリンクを追加 */}
-                        <Link to={`/post/${post.id}/edit`}>Edit</Link> {/* Editへのリンクを追加 */}
+                    <h2 className='title-action'>
+                        {post.title}
+                        <div className='action-list'>
+                            <Link to={`/post/${post.id}`}><h3>Show</h3></Link> {/* Singleへのリンクを追加 */}
+                            <Link to={`/post/${post.id}/edit`}><h3>Edit</h3></Link> {/* Editへのリンクを追加 */}
+                            <Link to={`/post/${post.id}/edit`}><h3>Delete</h3></Link> {/* Editへのリンクを追加 */}
+                        </div>
                     </h2>
                     <div className='post-info'>
                         {post.images && post.images.length > 0 && (
                             <img src={"http://localhost:8080/uploads/" + post.images[0].imagePath} alt={post.title} />
                         )}
-                        <p>{post.comment}</p>
+                        <div className='post-sentence'>
+                            <p>{post.comment}</p>
+                            <p>{post.updatedAt}</p>
+                        </div>
                     </div>
                 </div>
             ))}
