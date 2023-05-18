@@ -22,16 +22,23 @@ const Edit = () => {
         if (post) {
             setTitle(post.title);
             setComment(post.comment);
-            setImages(post.images);
+            const sortedImages = [...post.images].sort((a, b) => a.displayOrder - b.displayOrder);
+            setImages(sortedImages);
         }
     }, [post]);
 
     return (
         <div>
             <h1>Edit</h1>
+
             <form onSubmit={handleSubmit}>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
                 <input type="file" multiple onChange={(e) => setImages([...images, ...e.target.files])} required />
+                <div>
+                    {post && post.images && post.images.map((image, index) => (
+                        <img key={index} src={"http://localhost:8080/uploads/" + image.imagePath} alt={post.title} />
+                    ))}
+                </div>
                 <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Comment" required />
                 {error && <div className="error">{error}</div>}
                 <button type="submit" disabled={updatePost.isLoading}>Submit</button>
