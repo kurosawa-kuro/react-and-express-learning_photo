@@ -1,36 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
+import useStore from '../../state/store';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
 import { useUpdatePost } from '../../hooks/Posts/useUpdatePost';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
+import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 
+import { useImageDragAndDrop } from '../../hooks/Posts/useImageDragAndDrop';
+import { usePostUpdateEffect } from '../../hooks/Posts/usePostUpdateEffect';
+
 const DraggableImage = ({ id, imagePath, moveImage }) => {
-    const [, drag] = useDrag({
-        type: "image",
-        item: { id },
-    });
-
-    const [, drop] = useDrop({
-        accept: "image",
-        hover(item, monitor) {
-            if (!ref.current) {
-                return
-            }
-            const dragIndex = item.id;
-            const hoverIndex = id;
-            if (dragIndex === hoverIndex) {
-                return
-            }
-            moveImage(dragIndex, hoverIndex);
-            item.id = hoverIndex;
-        },
-    });
-
-    const ref = useRef();
-    drag(drop(ref));
+    const { ref } = useImageDragAndDrop(id, moveImage);
 
     return (
         <div ref={ref}>
@@ -40,25 +22,32 @@ const DraggableImage = ({ id, imagePath, moveImage }) => {
 };
 
 const Edit = () => {
+    useUserAuthentication();
     const { id } = useParams();
-    const [title, setTitle] = useState('');
-    const [images, setImages] = useState([]);
-    const [comment, setComment] = useState('');
-    const [error, setError] = useState('');
+    const {
+        title,
+        setTitle,
+        images,
+        setImages,
+        comment,
+        setComment,
+        error,
+        setError,
+    } = useStore(state => ({
+        title: state.title,
+        setTitle: state.setTitle,
+        images: state.images,
+        setImages: state.setImages,
+        comment: state.comment,
+        setComment: state.setComment,
+        error: state.error,
+        setError: state.setError,
+    }));
 
     const { data: post } = useFetchSinglePost(id);
-    console.log({ post });
-    useUserAuthentication();
     const { handleSubmit, ...updatePost } = useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment);
 
-    useEffect(() => {
-        if (post) {
-            setTitle(post.title);
-            setComment(post.comment);
-            const sortedImages = [...post.images].sort((a, b) => a.displayOrder - b.displayOrder);
-            setImages(sortedImages);
-        }
-    }, [post]);
+    usePostUpdateEffect(post, setTitle, setImages, setComment);
 
     const moveImage = (dragIndex, hoverIndex) => {
         const dragImage = images[dragIndex];
@@ -73,7 +62,6 @@ const Edit = () => {
         });
         setImages(updatedImages);
     };
-
 
     return (
         <div>

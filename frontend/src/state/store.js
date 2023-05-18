@@ -13,6 +13,15 @@ const useStore = create(set => ({
     setTotalPages: (pages) => set({ totalPages: pages }),
     search: '',
     setSearch: (search) => set({ search }),
+    // Adding new state properties for Edit component
+    title: '',
+    setTitle: (title) => set({ title }),
+    images: [],
+    setImages: (images) => set({ images }),
+    comment: '',
+    setComment: (comment) => set({ comment }),
+    error: '',
+    setError: (error) => set({ error }),
 }))
 
 export default useStore
