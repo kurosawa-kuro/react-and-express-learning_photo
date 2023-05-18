@@ -13,8 +13,10 @@ export const useUpdatePost = (id, setTitle, setImages, setComment, setError, tit
         const formData = new FormData();
         formData.append('title', title);
         console.log({ images });
-        images.forEach((image) => {
-            formData.append("images", image);
+        images.forEach((image, index) => {
+            formData.append(`images[${index}][id]`, image.id);
+            formData.append(`images[${index}][image]`, image.imagePath);
+            formData.append(`images[${index}][displayOrder]`, image.displayOrder);
         });
         formData.append('comment', comment);
         formData.append('userId', 1);  // Adjust this based on your authentication system

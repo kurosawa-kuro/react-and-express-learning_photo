@@ -47,10 +47,15 @@ export const updatePostController = asyncHandler(async (req, res) => {
         throw new Error('Invalid post ID');
     }
     const postId = parseInt(req.params.id);
-    // req.bodyからimagesを削除する
+    console.log("req.body.images", req.body.images);
+    // const test = req.body.images[0].imagePath;
+    // console.log("test", test);
+    console.log("req.body.images", req.body.images);
+
+
     delete req.body.images;
     const updatedPostData = { ...req.body };
-    console.log({ updatedPostData });
+    // console.log({ updatedPostData });
 
     if (isNaN(parseInt(updatedPostData.userId))) {
         throw new Error('Invalid user ID');
@@ -66,7 +71,7 @@ export const updatePostController = asyncHandler(async (req, res) => {
         displayOrder: index + 1,
     }));
 
-    await updatePostImages(postId, postImages);
+    // await updatePostImages(postId, postImages);
 
     res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
 });

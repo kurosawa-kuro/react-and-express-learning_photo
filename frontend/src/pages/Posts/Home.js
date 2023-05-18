@@ -1,5 +1,5 @@
-// src/pages/Home.js
 import React from 'react';
+import { Link } from 'react-router-dom'; // 新たに追加
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';
 import { useSearch } from '../../hooks/useSearch';
 import useFlashMessage from '../../hooks/useFlashMessage';
@@ -22,9 +22,11 @@ const Home = () => {
             <input type="text" value={search} onChange={handleSearchChange} placeholder="Search..." />
             {data && data.data.map((post) => (
                 <div className='post' key={post.id}>
-                    <h2>{post.title}</h2>
+                    <h2>
+                        <Link to={`/post/${post.id}`}>{post.title}</Link> {/* Singleへのリンクを追加 */}
+                        <Link to={`/post/${post.id}/edit`}>Edit</Link> {/* Editへのリンクを追加 */}
+                    </h2>
                     <div className='post-info'>
-                        {/* imagesの存在と長さを確認します */}
                         {post.images && post.images.length > 0 && (
                             <img src={"http://localhost:8080/uploads/" + post.images[0].imagePath} alt={post.title} />
                         )}
