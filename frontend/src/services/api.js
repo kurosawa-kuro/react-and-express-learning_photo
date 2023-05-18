@@ -31,3 +31,9 @@ export const fetchSinglePost = async (id) => {
     const { data } = await apiClient.get(`/posts/${id}`);
     return data;
 };
+
+export const updatePost = async (id, formData) => {
+    const apiClient = getApiClient();
+    const { data } = await apiClient.put(`/posts/${id}`, formData);
+    return data;
+};

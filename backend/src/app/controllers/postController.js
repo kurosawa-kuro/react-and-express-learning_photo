@@ -23,7 +23,9 @@ export const getAllPostsController = asyncHandler(async (req, res) => {
 
 export const createNewPostController = asyncHandler(async (req, res) => {
     console.log("hit createNewPostController");
-    // console.log("req.files", req.files);
+    console.log("req.body", req.body);
+
+    console.log("req.files", req.files);
 
     const newPost = await createNewPost(req.body);
     const postImages = req.files.map((file, index) => ({
@@ -38,17 +40,24 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 });
 
 export const updatePostController = asyncHandler(async (req, res) => {
+
+    console.log("hit updatePostController");
+    console.log("req.files", req.files);
     if (isNaN(parseInt(req.params.id))) {
         throw new Error('Invalid post ID');
     }
     const postId = parseInt(req.params.id);
+    // req.bodyからimagesを削除する
+    delete req.body.images;
     const updatedPostData = { ...req.body };
+    console.log({ updatedPostData });
 
     if (isNaN(parseInt(updatedPostData.userId))) {
         throw new Error('Invalid user ID');
     }
     updatedPostData.userId = parseInt(updatedPostData.userId);
 
+    // const newPost = await createNewPost(req.body);
     const updatedPost = await updatePost(postId, updatedPostData);
 
     const postImages = req.files.map((file, index) => ({
