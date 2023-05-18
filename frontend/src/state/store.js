@@ -3,8 +3,12 @@
 import create from 'zustand'
 
 const useStore = create(set => ({
-    user: null,
-    setUser: (user) => set({ user }),
+    // Check if user data exists in localStorage and use it, otherwise set to null
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    setUser: (user) => {
+        localStorage.setItem('user', JSON.stringify(user));
+        set({ user });
+    },
     flashMessage: '',
     setFlashMessage: (message) => set({ flashMessage: message }),
     currentPage: 1,

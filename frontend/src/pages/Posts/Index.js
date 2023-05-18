@@ -18,7 +18,7 @@ const Home = () => {
     return (
         <div>
             <h1>Posts</h1>
-            {flashMessage && <div className="flash-alert">{flashMessage}</div>}
+            {flashMessage && <div className="flash-message">{flashMessage}</div>}
             <input type="text" value={search} onChange={handleSearchChange} placeholder="Search..." />
             {data && data.data.map((post) => (
                 <div className='post-card' key={post.id}>
