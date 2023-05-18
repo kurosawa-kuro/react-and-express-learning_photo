@@ -31,6 +31,7 @@ export const useUpdatePost = (id, setTitle, setImages, setComment, setError, tit
             setComment('');
             setError('');
             queryClient.invalidateQueries(['post', id]);
+            queryClient.invalidateQueries(['posts']);
             navigate('/');  // Redirect to home page after successful post update
         },
         onError: (error) => {

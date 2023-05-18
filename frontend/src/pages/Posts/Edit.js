@@ -69,7 +69,7 @@ const Edit = () => {
             ],
         });
         updatedImages.forEach((image, index) => {
-            image.displayOrder = index + 1; // Add 1 so displayOrder starts at 1 instead of 0
+            image.displayOrder = index + 1;
         });
         setImages(updatedImages);
     };
@@ -81,7 +81,6 @@ const Edit = () => {
 
             <form onSubmit={handleSubmit}>
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
-                {/* <input type="file" multiple onChange={(e) => setImages([...images, ...e.target.files])} required /> */}
                 <div className='edit-images-list'>
                     <DndProvider backend={HTML5Backend}>
                         {images && images.map((image, index) => (

@@ -17,8 +17,7 @@ const Single = () => {
             <div className='single-photo-info'>
                 <div>
                     {data.images && data.images.map((image, index) => (
-                        <img key={index} src={"http://localhost:8080/uploads/" + image.imagePath} alt={`Post ${data.title} Image ${index}`} />
-
+                        <img key={index} src={"http://localhost:8080/uploads/" + image.imagePath} alt={`Post ${data.title} ${index}`} />
                     ))}
                 </div>
                 <p>{data.comment}</p>
