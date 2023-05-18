@@ -35,8 +35,8 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="button-link" to="/write">
-                        Write
+                    <Link className="button-link" to="/new">
+                        New
                     </Link>
                 </li>
 

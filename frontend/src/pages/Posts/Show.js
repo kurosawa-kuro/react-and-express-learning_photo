@@ -1,10 +1,10 @@
-// src/pages/Posts/Single.js
+// src/pages/Posts/Show.js
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
 
-const Single = () => {
+const Show = () => {
     const { id } = useParams();
     const { data, isLoading, isError } = useFetchSinglePost(id);
 
@@ -27,4 +27,4 @@ const Single = () => {
     );
 };
 
-export default Single;
+export default Show;
