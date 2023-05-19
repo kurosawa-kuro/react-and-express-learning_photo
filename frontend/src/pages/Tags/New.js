@@ -5,22 +5,11 @@ import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
 import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
 import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
-import useStore from '../../state/store.js'; // import the store
+import { useEditStore } from '../../state/store.js'; // import the store
 import { Link } from 'react-router-dom';
 
 const TagNew = () => {
-    // get the state and state-updating functions from the store
-    const {
-        name, setName,
-        editName, setEditName,
-        editTagId, setEditTagId,
-        error, setError,
-    } = useStore(state => ({
-        name: state.name, setName: state.setName,
-        editName: state.editName, setEditName: state.setEditName,
-        editTagId: state.editTagId, setEditTagId: state.setEditTagId,
-        error: state.error, setError: state.setError,
-    }));
+    const { name, setName, editName, setEditName, setEditTagId, editTagId, error, setError } = useEditStore()
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();

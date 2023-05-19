@@ -1,11 +1,10 @@
 // src/hooks/useFlashMessage.js
 
 import { useEffect } from 'react';
-import useStore from '../state/store';
+import { useFlashMessageStore } from '../state/store'
 
 const useFlashMessage = (timeout = 3000) => {
-    const flashMessage = useStore(state => state.flashMessage);
-    const setFlashMessage = useStore(state => state.setFlashMessage);
+    const { flashMessage, setFlashMessage } = useFlashMessageStore()
 
     useEffect(() => {
         let timer;

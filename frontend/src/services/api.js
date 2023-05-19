@@ -1,3 +1,5 @@
+// path frontend\src\services\api.js
+
 import { getApiClient } from './apiClient';
 
 export const registerUser = async ({ name, password, email }) => {

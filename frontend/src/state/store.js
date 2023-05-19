@@ -2,22 +2,37 @@
 
 import create from 'zustand'
 
-const useStore = create(set => ({
-    // Check if user data exists in localStorage and use it, otherwise set to null
+// User関連の状態
+const useUserStore = create(set => ({
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
     setUser: (user) => {
         localStorage.setItem('user', JSON.stringify(user));
         set({ user });
     },
+}))
+
+// Flash message関連の状態
+const useFlashMessageStore = create(set => ({
     flashMessage: '',
     setFlashMessage: (message) => set({ flashMessage: message }),
+}))
+
+// ページング関連の状態
+const usePagingStore = create(set => ({
     currentPage: 1,
     setCurrentPage: (page) => set({ currentPage: page }),
     totalPages: 1,
     setTotalPages: (pages) => set({ totalPages: pages }),
+}))
+
+// 検索関連の状態
+const useSearchStore = create(set => ({
     search: '',
     setSearch: (search) => set({ search }),
-    // Adding new state properties for Edit component
+}))
+
+// 編集コンポーネント関連の状態
+const useEditStore = create(set => ({
     title: '',
     setTitle: (title) => set({ title }),
     images: [],
@@ -34,4 +49,4 @@ const useStore = create(set => ({
     setEditTagId: (editTagId) => set({ editTagId }),
 }))
 
-export default useStore
+export { useUserStore, useFlashMessageStore, usePagingStore, useSearchStore, useEditStore }

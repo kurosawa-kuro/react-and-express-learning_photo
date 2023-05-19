@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import useStore from '../../state/store';
+import { useEditStore } from '../../state/store';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
 import { useUpdatePost } from '../../hooks/Posts/useUpdatePost';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
@@ -26,25 +26,7 @@ const DraggableImage = ({ id, imagePath, moveImage }) => {
 const Edit = () => {
     useUserAuthentication();
     const { id } = useParams();
-    const {
-        title,
-        setTitle,
-        images,
-        setImages,
-        comment,
-        setComment,
-        error,
-        setError,
-    } = useStore(state => ({
-        title: state.title,
-        setTitle: state.setTitle,
-        images: state.images,
-        setImages: state.setImages,
-        comment: state.comment,
-        setComment: state.setComment,
-        error: state.error,
-        setError: state.setError,
-    }));
+    const { title, setTitle, images, setImages, comment, setComment, error, setError } = useEditStore()
 
     const { data: post } = useFetchSinglePost(id);
     const { handleSubmit, ...updatePost } = useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment);

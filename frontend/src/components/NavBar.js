@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import useStore from '../state/store';
+import { useUserStore } from '../state/store';
 
 const NavBar = () => {
     const navigate = useNavigate();
-    const setUser = useStore(state => state.setUser);
-    const user = useStore(state => state.user);
+    const { user, setUser } = useUserStore()
 
     const logout = (event) => {
         event.preventDefault();
