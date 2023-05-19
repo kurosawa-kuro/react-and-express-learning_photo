@@ -3,9 +3,18 @@
 import { db } from "../../database/prisma/prismaClient.js";
 
 export const getAllTags = async () => {
-    const tags = await db.tag.findMany();
+    const tags = await db.tag.findMany({
+        include: {
+            posts: {
+                include: {
+                    post: true,  // This will include the Post data for each PostTag
+                },
+            },
+        },
+    });
     return tags;
 };
+
 
 export const createNewTag = async (tagData) => {
     const newTag = await db.tag.create({

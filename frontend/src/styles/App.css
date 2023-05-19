@@ -304,6 +304,7 @@ img {
   gap: 10px;
   justify-content: space-evenly;
   align-items: center;
+  padding: 10px;
 }
 
 .tag-item button {

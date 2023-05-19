@@ -3,7 +3,12 @@
 import { db } from "../../database/prisma/prismaClient.js";
 
 export const getAllPostTags = async () => {
-    const postTags = await db.postTag.findMany();
+    const postTags = await db.postTag.findMany({
+        include: {
+            post: true, // include the related post for each postTag
+            tag: true, // include the related tag for each postTag
+        },
+    });
     return postTags;
 };
 

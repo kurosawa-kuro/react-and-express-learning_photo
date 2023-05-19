@@ -1,17 +1,17 @@
 ### Get All Tags
 GET http://localhost:8080/tags
 Content-Type: application/json
-Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ2ODkxMSwiZXhwIjoxNjg0NTU1MzExfQ.1Vyr__OGtLYeT8zE9gXGT5HwYIiBqMK5PNfVad-hRQc"
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 ###
 
 ### Create a New Tag
 POST http://localhost:8080/tags
 Content-Type: application/json
-Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ2ODkxMSwiZXhwIjoxNjg0NTU1MzExfQ.1Vyr__OGtLYeT8zE9gXGT5HwYIiBqMK5PNfVad-hRQc"
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 {
-  "name": "New Tag"
+  "name": "New Tag2"
 }
 
 ###

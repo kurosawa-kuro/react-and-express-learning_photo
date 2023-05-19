@@ -1,24 +1,28 @@
 ### Get Posts (page 1)
 GET http://localhost:8080/posts?page=1
 Content-Type: application/json
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 ###
 
 ### Get Posts (page 2)
 GET http://localhost:8080/posts?page=2
 Content-Type: application/json
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 ###
 
 ### Get Posts (page 1 with search)
 GET http://localhost:8080/posts?page=1&search=b
 Content-Type: application/json
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 ###
 
 ### Get Posts (page 2 with search)
 GET http://localhost:8080/posts?page=2&search=query
 Content-Type: application/json
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 ###
 
@@ -26,7 +30,7 @@ Content-Type: application/json
 ### Create a new Post with multiple images
 POST http://localhost:8080/posts
 Content-Type: multipart/form-data; boundary=BoundaryString
-Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDIzMzUxOSwiZXhwIjoxNjg0MzE5OTE5fQ.Q8THa7GQDhTylja6h8jRQVSlNvQkc5CGEEdyuQT0Hs4"
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 --BoundaryString
 Content-Disposition: form-data; name="userId"
@@ -57,7 +61,7 @@ Content-Type: image/jpeg
 ### Update a Post with multiple images
 PUT http://localhost:8080/posts/12
 Content-Type: multipart/form-data; boundary=BoundaryString
-Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDIzMzUxOSwiZXhwIjoxNjg0MzE5OTE5fQ.Q8THa7GQDhTylja6h8jRQVSlNvQkc5CGEEdyuQT0Hs4"
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ3NjU3MSwiZXhwIjoxNjg0NTYyOTcxfQ.7UceXHOxmzt0AlAfIpjmfcpURmY9tsvloAsikGq3iwE"
 
 --BoundaryString
 Content-Disposition: form-data; name="userId"
