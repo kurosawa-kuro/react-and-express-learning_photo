@@ -27,8 +27,7 @@ const DraggableImage = ({ id, imagePath, moveImage }) => {
 const Edit = () => {
     useUserAuthentication();
     const { id } = useParams();
-    const { title, setTitle, images, setImages, comment, setComment, error, setError } = useEditStore()
-    const [selectedTags, setSelectedTags] = useState([]);
+    const { title, setTitle, images, setImages, comment, setComment, error, setError, selectedTags, setSelectedTags } = useEditStore()
     const { data: post } = useFetchSinglePost(id);
     const { data: tags } = useFetchTags();
 

@@ -47,6 +47,9 @@ const useEditStore = create(set => ({
     setEditName: (editName) => set({ editName }),
     editTagId: null,
     setEditTagId: (editTagId) => set({ editTagId }),
+    selectedTags: [],
+    setSelectedTags: (selectedTags) => set({ selectedTags }),
 }))
 
 export { useUserStore, useFlashMessageStore, usePagingStore, useSearchStore, useEditStore }
+
