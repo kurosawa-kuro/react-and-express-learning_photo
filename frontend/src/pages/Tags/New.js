@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
+import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 
 const TagNew = () => {
     const [name, setName] = useState('');
     const [error, setError] = useState('');
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
+    const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
 
     return (
         <div>
@@ -18,6 +20,17 @@ const TagNew = () => {
                 <button type="submit" disabled={createTag.isLoading}>Submit</button>
             </form>
             {createTag.isSuccess && <div>Tag successfully created!</div>}
+
+            <h2>Existing Tags</h2>
+            {tagsLoading && <div>Loading...</div>}
+            {tagsError && <div>Error loading tags</div>}
+            {tagList && (
+                <ul>
+                    {tagList.data.map(tag => (
+                        <li key={tag.id}>{tag.name}</li>
+                    ))}
+                </ul>
+            )}
         </div>
     );
 };

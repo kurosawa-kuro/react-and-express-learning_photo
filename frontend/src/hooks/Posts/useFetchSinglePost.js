@@ -1,4 +1,4 @@
-// src/hooks/useFetchSinglePost.js
+// frontend\src\hooks\Posts\useFetchSinglePost.js
 
 import { useQuery } from '@tanstack/react-query';
 import { fetchSinglePost } from '../../services/api';

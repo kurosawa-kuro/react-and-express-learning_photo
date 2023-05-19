@@ -1,4 +1,4 @@
-// src/hooks/useUpdatePost.js
+// frontend\src\hooks\Posts\useUpdatePost.js
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePost } from '../../services/api';

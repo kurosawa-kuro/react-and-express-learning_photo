@@ -1,4 +1,4 @@
-// Path: src/hooks/useImageDragAndDrop.js
+// Path: frontend\src\hooks\Posts\useImageDragAndDrop.js
 
 import { useDrag, useDrop } from 'react-dnd';
 import { useRef } from 'react';

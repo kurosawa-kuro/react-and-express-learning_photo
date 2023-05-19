@@ -39,9 +39,16 @@ export const updatePost = async (id, formData) => {
     return data;
 };
 
-
 export const createTag = async ({ name }) => {
     const apiClient = getApiClient();
     const { data } = await apiClient.post("/tags", { name });
+    return data;
+};
+
+export const fetchTags = async () => {
+    console.log('fetchTags');
+    const apiClient = getApiClient();
+    const { data } = await apiClient.get("/tags");
+    console.log('fetchTags: data: ', data);
     return data;
 };

@@ -1,4 +1,4 @@
-// src/hooks/useCreatePost.js
+// frontend\src\hooks\Posts\useCreatePost.js
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPost } from '../../services/api';
