@@ -21,7 +21,6 @@ export const createPost = async (formData) => {
 };
 
 export const fetchPosts = async (page = 1, search = '') => {
-    console.log("fetchPosts")
     const apiClient = getApiClient();
     const { data } = await apiClient.get(`/posts?page=${page}&search=${search}`);
     return data;
