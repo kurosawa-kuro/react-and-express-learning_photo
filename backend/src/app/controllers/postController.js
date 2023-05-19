@@ -3,7 +3,7 @@
 import asyncHandler from "express-async-handler";
 import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost, getSinglePost } from "../models/postModel.js";
 import { createPostImages, updatePostImages } from "../models/postImageModel.js";
-import { createNewPostTag, updatePostTag } from "../models/postTagModel.js";
+import { createNewPostTag, updatePostTag, deletePostTag } from "../models/postTagModel.js";
 
 export const getAllPostsController = asyncHandler(async (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -81,12 +81,11 @@ export const updatePostController = asyncHandler(async (req, res) => {
     await updatePostImages(postId, postImages);
 
     // Create the array of tag data and save them
-    console.log({ tagsList });
-    // const postTags = tagsList.map((tag) => ({
-    //     postId: postId, // Updated this line
-    //     tagId: parseInt(tag),
-    // }));
-    await updatePostTag(postId, tagsList)
+    if (!tagsList) {
+        await deletePostTag(postId);
+    } else {
+        await updatePostTag(postId, tagsList)
+    }
 
     res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
 });

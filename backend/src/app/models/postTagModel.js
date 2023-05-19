@@ -20,31 +20,25 @@ export const createNewPostTag = async (postTagData) => {
 };
 
 export const updatePostTag = async (postId, tagsList) => {
-    // 先に既存のデータを削除してから、新規追加した方が実装が楽
-    // postIdを指定してPostTagを削除
-    await db.postTag.deleteMany({
+    const deleteOldTags = db.postTag.deleteMany({
         where: { postId },
     });
 
-    // 新規にPostTagを追加
-    const newPostTags = tagsList.map((tagId) => {
-        return {
-            postId,
-            tagId: parseInt(tagId),
-        };
-    });
+    const newPostTags = tagsList.map(tagId => ({
+        postId,
+        tagId: parseInt(tagId),
+    }));
 
-    return await db.postTag.createMany({
+    const createNewTags = db.postTag.createMany({
         data: newPostTags,
     });
+
+    await db.$transaction([deleteOldTags, createNewTags]);
+
 };
 
-
-
-
-
-export const deletePostTag = async (id) => {
-    return await db.postTag.delete({
-        where: { id },
+export const deletePostTag = async (postId) => {
+    await db.postTag.deleteMany({
+        where: { postId },
     });
 };
