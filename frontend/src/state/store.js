@@ -1,4 +1,4 @@
-// Path: frontend/src/store.js
+// Path: frontend\src\state\store.js
 
 import create from 'zustand'
 
@@ -26,6 +26,12 @@ const useStore = create(set => ({
     setComment: (comment) => set({ comment }),
     error: '',
     setError: (error) => set({ error }),
+    name: '',
+    setName: (name) => set({ name }),
+    editName: '',
+    setEditName: (editName) => set({ editName }),
+    editTagId: null,
+    setEditTagId: (editTagId) => set({ editTagId }),
 }))
 
 export default useStore

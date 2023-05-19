@@ -1,20 +1,29 @@
 // src/pages/Tags/New.js
-import React, { useState } from 'react';
+import React from 'react';
 import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
 import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
-import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js'; // Add this line
+import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
+import useStore from '../../state/store.js'; // import the store
 
 const TagNew = () => {
-    const [name, setName] = useState('');
-    const [editName, setEditName] = useState('');
-    const [editTagId, setEditTagId] = useState(null);
-    const [error, setError] = useState('');
+    // get the state and state-updating functions from the store
+    const {
+        name, setName,
+        editName, setEditName,
+        editTagId, setEditTagId,
+        error, setError,
+    } = useStore(state => ({
+        name: state.name, setName: state.setName,
+        editName: state.editName, setEditName: state.setEditName,
+        editTagId: state.editTagId, setEditTagId: state.setEditTagId,
+        error: state.error, setError: state.setError,
+    }));
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
     const deleteTag = useDeleteTag();
-    const updateTag = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName); // Update this line
+    const updateTag = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName);
 
     const handleEdit = (tag) => {
         setEditTagId(tag.id);
@@ -34,7 +43,7 @@ const TagNew = () => {
                 {error && <div className="error">{error}</div>}
                 <button type="submit" disabled={createTag.isLoading}>Submit</button>
             </form>
-            {createTag.isSuccess && <div>Tag successfully created!</div>}
+            {/* {createTag.isSuccess && <div>Tag successfully created!</div>} */}
 
             <h2>Existing Tags</h2>
             {tagsLoading && <div>Loading...</div>}
