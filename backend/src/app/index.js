@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import userRoutes from "./routes/usersRoute.js";
 import postRoutes from "./routes/postsRoute.js";
 import tagRoutes from "./routes/tagsRoute.js";
+import postTagRoutes from "./routes/postTagRoutes.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,5 +32,6 @@ app.use(express.json());
 userRoutes(app);
 postRoutes(app);
 tagRoutes(app);
+postTagRoutes(app);
 
 export default app;
