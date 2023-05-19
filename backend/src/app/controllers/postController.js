@@ -53,6 +53,7 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 
 
 export const updatePostController = asyncHandler(async (req, res) => {
+    console.log("updatePostController req.body", req.body);
     if (isNaN(parseInt(req.params.id))) {
         throw new Error('Invalid post ID');
     }

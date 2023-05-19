@@ -78,7 +78,12 @@ export const getSinglePost = async (id) => {
         where: { id },
         include: {
             user: true, // Include related User
-            images: true // Include related PostImage
+            images: true,
+            tags: {
+                include: {
+                    tag: true,
+                },
+            } // Include related PostImage
         }
     });
 

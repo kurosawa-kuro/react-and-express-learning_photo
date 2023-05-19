@@ -317,3 +317,7 @@ img {
 .tag-item a {
   text-decoration: none;
 }
+
+select {
+  width: 100%;
+}

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { updatePost } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
-export const useUpdatePost = (id, setTitle, setImages, setComment, setError, title, images, comment) => {
+export const useUpdatePost = (id, setTitle, setImages, setComment, setError, title, images, comment, selectedTags) => {
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
@@ -19,6 +19,11 @@ export const useUpdatePost = (id, setTitle, setImages, setComment, setError, tit
             formData.append(`images[${index}][displayOrder]`, image.displayOrder);
         });
         formData.append('comment', comment);
+
+        selectedTags.forEach((tag, index) => { // Add this block
+            formData.append(`tags[${index}]`, tag);
+        });
+
         formData.append('userId', 1);  // Adjust this based on your authentication system
 
         mutation.mutate(formData);
