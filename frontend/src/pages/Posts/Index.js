@@ -1,7 +1,10 @@
 // path frontend\src\pages\Posts\Index.js
 
+// React and related packages
 import React from 'react';
-import { Link } from 'react-router-dom'; // 新たに追加
+import { Link } from 'react-router-dom';
+
+// Hooks
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';
 import { useSearch } from '../../hooks/useSearch';
 import useFlashMessage from '../../hooks/useFlashMessage';
@@ -9,10 +12,10 @@ import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 
 const Home = () => {
     const isAuthenticated = useUserAuthentication();
+    const flashMessage = useFlashMessage();
     const { search, handleSearchChange } = useSearch();
     const { data, isLoading, isError, handlePrevious, handleNext, currentPage, totalPages } =
         useFetchPosts(isAuthenticated, search);
-    const flashMessage = useFlashMessage();
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error occurred while fetching posts.</div>;
