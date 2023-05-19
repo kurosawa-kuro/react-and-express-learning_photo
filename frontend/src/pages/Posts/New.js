@@ -1,11 +1,22 @@
-import React from 'react';
+// Path: frontend\src\pages\Posts\New.js
+
+import React, { useState } from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';
+import { useFetchTags } from '../../hooks/Posts/useFetchTags';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 
 const New = () => {
     useUserAuthentication();
-    const { title, images, comment, error, setTitle, setImages, setComment, handleSubmit, ...createPost } =
-        useCreatePost();
+    const [title, setTitle] = useState('');
+    const [images, setImages] = useState([]);
+    const [comment, setComment] = useState('');
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [error, setError] = useState('');
+
+    const { handleSubmit, ...createPost } =
+        useCreatePost(setTitle, setImages, setComment, setError, title, images, comment, selectedTags);
+
+    const { data: tags } = useFetchTags();
 
     return (
         <div>
@@ -14,6 +25,18 @@ const New = () => {
                 <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
                 <input type="file" multiple onChange={(e) => setImages([...images, ...e.target.files])} required />
                 <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Comment" required />
+
+                {tags && (
+                    <select multiple onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
+                        {/* {JSON.stringify(tags.data)} */}
+                        {tags.data.map((tag) => (
+                            <option key={tag.id} value={tag.id}>
+                                {tag.name}
+                            </option>
+                        ))}
+                    </select>
+                )}
+
                 {error && <div className="error">{error}</div>}
                 <button type="submit" disabled={createPost.isLoading}>Submit</button>
             </form>
@@ -23,3 +46,4 @@ const New = () => {
 };
 
 export default New;
+

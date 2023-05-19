@@ -3,6 +3,7 @@
 import asyncHandler from "express-async-handler";
 import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost, getSinglePost } from "../models/postModel.js";
 import { createPostImages, updatePostImages } from "../models/postImageModel.js";
+import { createNewPostTag } from "../models/postTagModel.js";
 
 export const getAllPostsController = asyncHandler(async (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -22,17 +23,34 @@ export const getAllPostsController = asyncHandler(async (req, res) => {
 });
 
 export const createNewPostController = asyncHandler(async (req, res) => {
-    const newPost = await createNewPost(req.body);
+    // Extract and remove tags from the request body
+    const { tags: rawTags, ...postData } = req.body;
+
+    // Ensure tags is an array
+    const tags = Array.isArray(rawTags) ? rawTags : [rawTags];
+
+    // Create the new post
+    const newPost = await createNewPost(postData);
+
+    // Create the array of image data and save them
     const postImages = req.files.map((file, index) => ({
         postId: newPost.id,
         imagePath: file.filename,
         displayOrder: index + 1,
     }));
-
     await createPostImages(postImages);
 
+    // Create the array of tag data and save them
+    const postTags = tags.map((tag) => ({
+        postId: newPost.id,
+        tagId: parseInt(tag),
+    }));
+    await Promise.all(postTags.map((postTag) => createNewPostTag(postTag)));
+
+    // Return the successful response
     res.status(201).json({ message: 'Post created successfully', data: newPost });
 });
+
 
 export const updatePostController = asyncHandler(async (req, res) => {
     if (isNaN(parseInt(req.params.id))) {
