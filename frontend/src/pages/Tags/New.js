@@ -1,30 +1,21 @@
 // src/pages/Tags/New.js
 
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { useEditStore } from '../../state/store.js'; // import the store
 import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
 import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
 import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
-import { useEditStore } from '../../state/store.js'; // import the store
-import { Link } from 'react-router-dom';
 
 const TagNew = () => {
-    const { name, setName, editName, setEditName, setEditTagId, editTagId, error, setError } = useEditStore()
+    const { name, setName, editName, setEditName, setEditTagId, editTagId, error, setError } = useEditStore();
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
+    const { handleEdit, handleUpdate } = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName);
     const deleteTag = useDeleteTag();
-    const updateTag = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName);
-
-    const handleEdit = (tag) => {
-        setEditTagId(tag.id);
-        setEditName(tag.name);
-    };
-
-    const handleUpdate = (e) => {
-        e.preventDefault();
-        updateTag.mutate();
-    };
 
     return (
         <div>
