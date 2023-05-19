@@ -1,4 +1,4 @@
-// Path: frontend/src/pages/Register.js
+// Path: frontend\src\pages\Auth\Register.js
 
 import React, { useState } from 'react';
 import { useRegisterUser } from '../../hooks/Auth/useRegisterUser';

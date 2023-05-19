@@ -1,4 +1,4 @@
-// Path: frontend/src/pages/Login.js
+// Path: frontend\src\pages\Auth\Login.js
 
 import React, { useState } from 'react';
 import { useLoginUser } from '../../hooks/Auth/useLoginUser';

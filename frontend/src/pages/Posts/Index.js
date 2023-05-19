@@ -1,3 +1,5 @@
+// path frontend\src\pages\Posts\Index.js
+
 import React from 'react';
 import { Link } from 'react-router-dom'; // 新たに追加
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';

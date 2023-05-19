@@ -1,4 +1,4 @@
-// src/pages/Posts/Show.js
+// frontend\src\pages\Posts\Show.js
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
