@@ -6,6 +6,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import userRoutes from "./routes/usersRoute.js";
 import postRoutes from "./routes/postsRoute.js";
+import tagRoutes from "./routes/tagsRoute.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -29,5 +30,6 @@ app.use(express.json());
 // Set up item routes
 userRoutes(app);
 postRoutes(app);
+tagRoutes(app);
 
 export default app;
