@@ -1,13 +1,22 @@
 // Path: backend/src/app/controllers/tagController.js
 
 import asyncHandler from "express-async-handler";
-import { getAllTags, createNewTag, updateTag, deleteTag } from "../models/tagModel.js";
+import { getAllTags, getSingleTag, createNewTag, updateTag, deleteTag } from "../models/tagModel.js";
 
 export const getAllTagsController = asyncHandler(async (req, res) => {
     const tags = await getAllTags();
 
     res.json({
         data: tags,
+    });
+});
+
+export const getSingleTagController = asyncHandler(async (req, res) => {
+    const tagId = parseInt(req.params.id);
+    const tag = await getSingleTag(tagId);
+
+    res.json({
+        data: tag,
     });
 });
 

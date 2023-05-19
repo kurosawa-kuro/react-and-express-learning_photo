@@ -62,3 +62,10 @@ export const updateTag = async ({ id, name }) => {
     const { data } = await apiClient.put(`/tags/${id}`, { name });
     return data;
 };
+
+export const fetchPostsByTag = async (tagId, page = 1) => {
+    const apiClient = getApiClient();
+    const { data } = await apiClient.get(`/tags/${tagId}?page=${page}`);
+    console.log("fetchPostsByTag: data: ", data)
+    return data;
+};

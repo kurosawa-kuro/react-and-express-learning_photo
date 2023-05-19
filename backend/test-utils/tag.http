@@ -5,6 +5,14 @@ Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IlRlc3QgVX
 
 ###
 
+### Get a Single Tag with associated posts
+GET http://localhost:8080/tags/1
+Content-Type: application/json
+Cookie: jwt="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6IlRlc3QgVXNlciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTY4NDQ2ODkxMSwiZXhwIjoxNjg0NTU1MzExfQ.1Vyr__OGtLYeT8zE9gXGT5HwYIiBqMK5PNfVad-hRQc"
+
+###
+
+
 ### Create a New Tag
 POST http://localhost:8080/tags
 Content-Type: application/json

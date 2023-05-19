@@ -35,3 +35,17 @@ export const deleteTag = async (id) => {
         where: { id },
     });
 };
+
+export const getSingleTag = async (id) => {
+    const tag = await db.tag.findUnique({
+        where: { id },
+        include: {
+            posts: {
+                include: {
+                    post: true,  // This will include the Post data for each PostTag
+                },
+            },
+        },
+    });
+    return tag;
+};

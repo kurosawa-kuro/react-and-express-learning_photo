@@ -14,6 +14,7 @@ import TagNew from "./pages/Tags/New";
 import Information from "./pages/Information";
 import Register from "./pages/Auth/Register";
 import Login from "./pages/Auth/Login";
+import TagPosts from './pages/Posts/TagPosts';
 
 const App = () => {
   return (
@@ -27,6 +28,8 @@ const App = () => {
             <Route path="/post/:id" element={<Show />} />
             <Route path="/post/:id/edit" element={<Edit />} />
             <Route path="/tag/new" element={<TagNew />} />
+            <Route path="/tag/:tagId" element={<TagPosts />} />
+
             <Route path="/information" element={<Information />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />

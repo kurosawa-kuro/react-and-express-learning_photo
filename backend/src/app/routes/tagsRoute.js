@@ -4,6 +4,7 @@ import asyncHandler from "express-async-handler";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 import {
     getAllTagsController,
+    getSingleTagController,
     createNewTagController,
     updateTagController,
     deleteTagController
@@ -12,6 +13,8 @@ import {
 const tagRoutes = (app) => {
     // Get all tags
     app.get("/tags", authMiddleware, asyncHandler(getAllTagsController));
+
+    app.get("/tags/:id", authMiddleware, asyncHandler(getSingleTagController));
 
     // Create a new tag
     app.post("/tags", authMiddleware, asyncHandler(createNewTagController));
