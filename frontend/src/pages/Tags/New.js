@@ -30,8 +30,10 @@ const TagNew = () => {
                 <ul>
                     {tagList.data.map(tag => (
                         <li key={tag.id}>
-                            {tag.name}
-                            <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>  {/* Add this line */}
+                            <div className='tag-item'>
+                                {tag.name}
+                                <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>
+                            </div>
                         </li>
                     ))}
                 </ul>
