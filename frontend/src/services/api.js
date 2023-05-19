@@ -38,3 +38,10 @@ export const updatePost = async (id, formData) => {
     const { data } = await apiClient.put(`/posts/${id}`, formData);
     return data;
 };
+
+
+export const createTag = async ({ name }) => {
+    const apiClient = getApiClient();
+    const { data } = await apiClient.post("/tags", { name });
+    return data;
+};

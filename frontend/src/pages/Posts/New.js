@@ -1,10 +1,10 @@
-// Path: frontend/src/pages/Write.js
+// Path: frontend\src\pages\Posts\New.js
 
 import React, { useState } from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 
-const Write = () => {
+const New = () => {
     const [title, setTitle] = useState('');
     const [images, setImages] = useState([]);
     const [comment, setComment] = useState('');
@@ -28,4 +28,4 @@ const Write = () => {
     );
 };
 
-export default Write;
+export default New;

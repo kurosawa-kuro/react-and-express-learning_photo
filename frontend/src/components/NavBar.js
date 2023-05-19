@@ -35,8 +35,13 @@ const NavBar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link className="button-link" to="/new">
-                        New
+                    <Link className="button-link" to="/post/new">
+                        New Post
+                    </Link>
+                </li>
+                <li>
+                    <Link className="button-link" to="/tag/new">
+                        New Tag
                     </Link>
                 </li>
 
