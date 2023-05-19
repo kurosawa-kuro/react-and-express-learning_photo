@@ -56,3 +56,9 @@ export const deleteTag = async (id) => {
     const response = await apiClient.delete(`/tags/${id}`);
     return response.data;
 };
+
+export const updateTag = async ({ id, name }) => {
+    const apiClient = getApiClient();
+    const { data } = await apiClient.put(`/tags/${id}`, { name });
+    return data;
+};

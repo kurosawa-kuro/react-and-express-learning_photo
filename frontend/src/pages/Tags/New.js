@@ -1,17 +1,30 @@
 // src/pages/Tags/New.js
-
 import React, { useState } from 'react';
 import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
 import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
-import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js'; // Add this line
+import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
+import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js'; // Add this line
 
 const TagNew = () => {
     const [name, setName] = useState('');
+    const [editName, setEditName] = useState('');
+    const [editTagId, setEditTagId] = useState(null);
     const [error, setError] = useState('');
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
-    const deleteTag = useDeleteTag(); // Add this line
+    const deleteTag = useDeleteTag();
+    const updateTag = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName); // Update this line
+
+    const handleEdit = (tag) => {
+        setEditTagId(tag.id);
+        setEditName(tag.name);
+    };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        updateTag.mutate();
+    };
 
     return (
         <div>
@@ -31,8 +44,21 @@ const TagNew = () => {
                     {tagList.data.map(tag => (
                         <li key={tag.id}>
                             <div className='tag-item'>
-                                {tag.name}
-                                <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>
+                                {tag.id === editTagId ? (
+                                    <form onSubmit={handleUpdate}>
+                                        <input type="text" value={editName} onChange={(e) => setEditName(e.target.value)} required />
+                                        <div className='tag-item'>
+                                            <button type="submit">Update</button>
+                                            <button onClick={() => setEditTagId(null)}>Cancel</button>
+                                        </div>
+                                    </form>
+                                ) : (
+                                    <>
+                                        {tag.name}
+                                        <button onClick={() => handleEdit(tag)}>Edit</button>
+                                        <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>
+                                    </>
+                                )}
                             </div>
                         </li>
                     ))}
