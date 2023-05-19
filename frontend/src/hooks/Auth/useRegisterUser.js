@@ -1,10 +1,16 @@
-// frontend\src\hooks\Auth\useLoginUser.js
+// frontend\src\hooks\Auth\useRegisterUser.js
+
+import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { registerUser } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore, useFlashMessageStore } from '../../state/store'
 
-export const useRegisterUser = (setName, setEmail, setPassword, setError) => {
+export const useRegisterUser = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const { setUser } = useUserStore()
     const { setFlashMessage } = useFlashMessageStore()
     const navigate = useNavigate();
@@ -28,7 +34,7 @@ export const useRegisterUser = (setName, setEmail, setPassword, setError) => {
         },
     });
 
-    const handleSubmit = (name, email, password) => (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (!name || !email || !password) {
             setError('Please fill out all fields');
@@ -37,5 +43,5 @@ export const useRegisterUser = (setName, setEmail, setPassword, setError) => {
         mutation.mutate({ name, email, password });
     };
 
-    return { handleSubmit, ...mutation };
+    return { setName, setEmail, setPassword, handleSubmit, error, isLoading: mutation.isLoading, isSuccess: mutation.isSuccess };
 };

@@ -1,10 +1,13 @@
-// frontend\src\hooks\Auth\useLoginUser.js
 import { useMutation } from '@tanstack/react-query';
 import { loginUser } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore, useFlashMessageStore } from '../../state/store'
+import { useState } from 'react';
 
-export const useLoginUser = (setEmail, setPassword, setError) => {
+export const useLoginUser = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const { setUser } = useUserStore()
     const { setFlashMessage } = useFlashMessageStore()
     const navigate = useNavigate();
@@ -26,7 +29,7 @@ export const useLoginUser = (setEmail, setPassword, setError) => {
         },
     });
 
-    const handleSubmit = (email, password) => (event) => {
+    const handleSubmit = (event) => {
         event.preventDefault();
         if (!email || !password) {
             setError('Please fill out all fields');
@@ -35,5 +38,5 @@ export const useLoginUser = (setEmail, setPassword, setError) => {
         }
     };
 
-    return { handleSubmit, ...mutation };
+    return { email, password, error, setEmail, setPassword, handleSubmit, ...mutation };
 };

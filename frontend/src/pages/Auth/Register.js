@@ -1,27 +1,21 @@
 // Path: frontend\src\pages\Auth\Register.js
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useRegisterUser } from '../../hooks/Auth/useRegisterUser';
 import '../../styles/App.css';
 
 const Registration = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const { handleSubmit, isLoading, isSuccess } = useRegisterUser(setName, setEmail, setPassword, setError);
+    const { setName, setEmail, setPassword, handleSubmit, error, isLoading, isSuccess } = useRegisterUser();
 
     return (
         <div className="container">
             <h1>Registration</h1>
-            <form onSubmit={handleSubmit(name, email, password)}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name:</label>
                     <input
                         type="text"
                         id="name"
-                        value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your name"
                     />
@@ -31,7 +25,6 @@ const Registration = () => {
                     <input
                         type="email"
                         id="email"
-                        value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
                     />
@@ -41,7 +34,6 @@ const Registration = () => {
                     <input
                         type="password"
                         id="password"
-                        value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter your password"
                     />

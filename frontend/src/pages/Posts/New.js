@@ -1,17 +1,11 @@
-// Path: frontend\src\pages\Posts\New.js
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 
 const New = () => {
-    const [title, setTitle] = useState('');
-    const [images, setImages] = useState([]);
-    const [comment, setComment] = useState('');
-    const [error, setError] = useState('');
-
     useUserAuthentication();
-    const { handleSubmit, ...createPost } = useCreatePost(setTitle, setImages, setComment, setError, title, images, comment);
+    const { title, images, comment, error, setTitle, setImages, setComment, handleSubmit, ...createPost } =
+        useCreatePost();
 
     return (
         <div>

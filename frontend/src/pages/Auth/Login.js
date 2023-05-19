@@ -1,20 +1,14 @@
-// Path: frontend\src\pages\Auth\Login.js
-
-import React, { useState } from 'react';
+import React from 'react';
 import { useLoginUser } from '../../hooks/Auth/useLoginUser';
 import '../../styles/App.css';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
-
-    const { handleSubmit, isLoading } = useLoginUser(setEmail, setPassword, setError);
+    const { email, password, error, setEmail, setPassword, handleSubmit, isLoading } = useLoginUser();
 
     return (
         <div className="container">
             <h1>Login</h1>
-            <form onSubmit={handleSubmit(email, password)}>
+            <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>
                     <input

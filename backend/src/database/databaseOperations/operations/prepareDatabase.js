@@ -20,6 +20,16 @@ async function clearPostTagTable() {
     }
 }
 
+async function clearPostImageTable() {
+    try {
+        await db.$queryRaw`Truncate PostImage;`
+        console.log("Cleared post tag table.");
+    } catch (e) {
+        console.error("Failed to clear post tag table:", e);
+        throw e;
+    }
+}
+
 async function clearPostTable() {
     try {
         await db.$queryRaw`Truncate Post;`
@@ -73,6 +83,7 @@ async function clearUserFollowerTable() {
 export async function setupDatabaseForOperations() {
     await establishDatabaseConnection();
 
+    await clearPostImageTable();
     await clearPostTagTable();
     await clearTagTable();
     await clearCommentTable();

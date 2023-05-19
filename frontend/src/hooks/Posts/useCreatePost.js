@@ -1,10 +1,13 @@
-// frontend\src\hooks\Posts\useCreatePost.js
-
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPost } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-export const useCreatePost = (setTitle, setImages, setComment, setError, title, images, comment) => {
+export const useCreatePost = () => {
+    const [title, setTitle] = useState('');
+    const [images, setImages] = useState([]);
+    const [comment, setComment] = useState('');
+    const [error, setError] = useState('');
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
@@ -12,24 +15,18 @@ export const useCreatePost = (setTitle, setImages, setComment, setError, title, 
         e.preventDefault();
         const formData = new FormData();
         formData.append('title', title);
-        // Append images array to FormData
-        // images.forEach((image, index) => {
+        console.log({ images });
         images.forEach((image) => {
             formData.append("images", image);
         });
-        // });
         formData.append('comment', comment);
-
-
-        // userIdはログインシステムに基づいて変更してください
-        formData.append('userId', 1);
+        formData.append('userId', 1);  // userIdはログインシステムに基づいて変更してください
 
         mutation.mutate(formData);
     };
 
     const mutation = useMutation(createPost, {
         onSuccess: () => {
-            // Clear form data
             setTitle('');
             setImages([]);
             setComment('');
@@ -38,10 +35,9 @@ export const useCreatePost = (setTitle, setImages, setComment, setError, title, 
             navigate('/');  // 投稿成功時にホームページへ遷移
         },
         onError: (error) => {
-            // サーバーからのエラーメッセージを取り出して設定
             setError(error.response.data.error);
         }
     });
 
-    return { handleSubmit, ...mutation };
+    return { title, images, comment, error, setTitle, setImages, setComment, handleSubmit, ...mutation };
 };

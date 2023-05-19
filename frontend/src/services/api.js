@@ -3,7 +3,6 @@
 import { getApiClient } from './apiClient';
 
 export const registerUser = async ({ name, password, email }) => {
-    console.log('registerUser: name, password, email: ', name, password, email)
     const apiClient = getApiClient();
     const { data } = await apiClient.post("/register", { name, password, email });
     return data;
