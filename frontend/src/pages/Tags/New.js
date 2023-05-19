@@ -11,7 +11,6 @@ import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
 
 const TagNew = () => {
     const { name, setName, editName, setEditName, setEditTagId, editTagId, error, setError } = useEditStore();
-
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
     const { handleEdit, handleUpdate } = useUpdateTag(setEditTagId, setEditName, setError, editTagId, editName);
