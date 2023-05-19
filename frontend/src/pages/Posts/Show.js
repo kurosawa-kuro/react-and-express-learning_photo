@@ -22,7 +22,7 @@ const Show = () => {
                             key={index}
                             src={"http://localhost:8080/uploads/" + image.imagePath}
                             alt={`Post ${data.title} ${index}`}
-                            onClick={() => openModal(image)}
+                            onClick={() => openModal(image.imagePath)}
                             style={{ cursor: 'pointer' }}
                         />
                     ))}
