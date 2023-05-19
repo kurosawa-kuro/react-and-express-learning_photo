@@ -53,8 +53,6 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 
 
 export const updatePostController = asyncHandler(async (req, res) => {
-
-    console.log("updatePostController req.body");
     const postId = parseInt(req.params.id);
 
     if (isNaN(postId)) {
@@ -62,7 +60,6 @@ export const updatePostController = asyncHandler(async (req, res) => {
     }
 
     const { images: imagesList, tags: tagsList, ...updatedPostData } = req.body;
-    console.log("updatePostController", imagesList, tagsList, updatedPostData);
 
     if (isNaN(parseInt(updatedPostData.userId))) {
         throw new Error('Invalid user ID');
@@ -72,7 +69,7 @@ export const updatePostController = asyncHandler(async (req, res) => {
 
     const updatedPost = await updatePost(postId, updatedPostData);
 
-    const postImages = imagesList.map((file, index) => ({
+    const postImages = imagesList.map((file) => ({
         postId: updatedPost.id,
         imagePath: file.image,
         displayOrder: parseInt(file.displayOrder),
@@ -87,7 +84,7 @@ export const updatePostController = asyncHandler(async (req, res) => {
         await updatePostTag(postId, tagsList)
     }
 
-    res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
+    res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages, tagsList });
 });
 
 

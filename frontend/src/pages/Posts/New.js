@@ -1,21 +1,14 @@
 // Path: frontend\src\pages\Posts\New.js
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';
 import { useFetchTags } from '../../hooks/Posts/useFetchTags';
 import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 
 const New = () => {
     useUserAuthentication();
-    const [title, setTitle] = useState('');
-    const [images, setImages] = useState([]);
-    const [comment, setComment] = useState('');
-    const [selectedTags, setSelectedTags] = useState([]);
-    const [error, setError] = useState('');
-
-    const { handleSubmit, ...createPost } =
-        useCreatePost(setTitle, setImages, setComment, setError, title, images, comment, selectedTags);
-
+    const { title, setTitle, images, setImages, comment, setComment, selectedTags, setSelectedTags, error, handleSubmit, ...createPost } =
+        useCreatePost();
     const { data: tags } = useFetchTags();
 
     return (

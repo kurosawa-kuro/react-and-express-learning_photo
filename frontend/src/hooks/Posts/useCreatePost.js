@@ -1,10 +1,17 @@
 // frontend\src\hooks\Posts\useCreatePost.js
 
+import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { createPost } from '../../services/api';
 import { useNavigate } from 'react-router-dom';
 
-export const useCreatePost = (setTitle, setImages, setComment, setError, title, images, comment, selectedTags) => {
+export const useCreatePost = () => {
+    const [title, setTitle] = useState('');
+    const [images, setImages] = useState([]);
+    const [comment, setComment] = useState('');
+    const [selectedTags, setSelectedTags] = useState([]);
+    const [error, setError] = useState('');
+
     const queryClient = useQueryClient();
     const navigate = useNavigate();
 
@@ -42,5 +49,5 @@ export const useCreatePost = (setTitle, setImages, setComment, setError, title, 
         }
     });
 
-    return { handleSubmit, ...mutation };
+    return { title, setTitle, images, setImages, comment, setComment, selectedTags, setSelectedTags, error, handleSubmit, ...mutation };
 };
