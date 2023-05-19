@@ -3,7 +3,7 @@
 import asyncHandler from "express-async-handler";
 import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost, getSinglePost } from "../models/postModel.js";
 import { createPostImages, updatePostImages } from "../models/postImageModel.js";
-import { createNewPostTag } from "../models/postTagModel.js";
+import { createNewPostTag, updatePostTag } from "../models/postTagModel.js";
 
 export const getAllPostsController = asyncHandler(async (req, res) => {
     const page = Number(req.query.page) || 1;
@@ -53,26 +53,26 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 
 
 export const updatePostController = asyncHandler(async (req, res) => {
-    console.log("updatePostController req.body", req.body);
-    if (isNaN(parseInt(req.params.id))) {
+
+    console.log("updatePostController req.body");
+    const postId = parseInt(req.params.id);
+
+    if (isNaN(postId)) {
         throw new Error('Invalid post ID');
     }
-    const postId = parseInt(req.params.id);
-    const imagesList = req.body.images;
 
-    delete req.body.images;
-    const updatedPostData = { ...req.body };
+    const { images: imagesList, tags: tagsList, ...updatedPostData } = req.body;
+    console.log("updatePostController", imagesList, tagsList, updatedPostData);
 
     if (isNaN(parseInt(updatedPostData.userId))) {
         throw new Error('Invalid user ID');
     }
+
     updatedPostData.userId = parseInt(updatedPostData.userId);
 
-    // const newPost = await createNewPost(req.body);
     const updatedPost = await updatePost(postId, updatedPostData);
 
     const postImages = imagesList.map((file, index) => ({
-        // id: file.id,
         postId: updatedPost.id,
         imagePath: file.image,
         displayOrder: parseInt(file.displayOrder),
@@ -80,8 +80,18 @@ export const updatePostController = asyncHandler(async (req, res) => {
 
     await updatePostImages(postId, postImages);
 
+    // Create the array of tag data and save them
+    console.log({ tagsList });
+    // const postTags = tagsList.map((tag) => ({
+    //     postId: postId, // Updated this line
+    //     tagId: parseInt(tag),
+    // }));
+    await updatePostTag(postId, tagsList)
+
     res.status(200).json({ message: 'Post updated successfully', data: updatedPost, postImages });
 });
+
+
 
 export const getSinglePostController = asyncHandler(async (req, res) => {
     const id = parseInt(req.params.id);

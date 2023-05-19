@@ -28,7 +28,6 @@ const New = () => {
 
                 {tags && (
                     <select multiple onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>
-                        {/* {JSON.stringify(tags.data)} */}
                         {tags.data.map((tag) => (
                             <option key={tag.id} value={tag.id}>
                                 {tag.name}
