@@ -27,11 +27,7 @@ const Edit = () => {
     useUserAuthentication();
     const { id } = useParams();
     const { title, setTitle, images, setImages, comment, setComment, error, setError } = useEditStore()
-
     const { data: post } = useFetchSinglePost(id);
-    const { handleSubmit, ...updatePost } = useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment);
-
-    usePostUpdateEffect(post, setTitle, setImages, setComment);
 
     const moveImage = (dragIndex, hoverIndex) => {
         const dragImage = images[dragIndex];
@@ -46,6 +42,11 @@ const Edit = () => {
         });
         setImages(updatedImages);
     };
+
+    usePostUpdateEffect(post, setTitle, setImages, setComment);
+
+    const { handleSubmit, ...updatePost } =
+        useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment);
 
     return (
         <div>

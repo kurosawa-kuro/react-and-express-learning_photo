@@ -15,7 +15,7 @@ export const useCreatePost = () => {
         e.preventDefault();
         const formData = new FormData();
         formData.append('title', title);
-        console.log({ images });
+        // console.log({ images });
         images.forEach((image) => {
             formData.append("images", image);
         });
