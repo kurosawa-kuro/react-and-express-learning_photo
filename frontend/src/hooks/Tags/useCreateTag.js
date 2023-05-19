@@ -20,7 +20,7 @@ export const useCreateTag = (setName, setError, name) => {
             setName('');
             setError('');
             queryClient.invalidateQueries(['tags']);
-            navigate('/tags');  // Successfully created a new tag, navigate to tags page
+            navigate('/tag/new');  // Successfully created a new tag, navigate to tags page
         },
         onError: (error) => {
             // Set error message from the server

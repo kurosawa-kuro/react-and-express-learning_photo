@@ -1,4 +1,4 @@
-// src/hooks/useUserAuthentication.js
+// frontend\src\hooks\Auth\useUserAuthentication.js
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
