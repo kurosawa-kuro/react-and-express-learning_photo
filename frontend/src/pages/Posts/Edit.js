@@ -2,15 +2,15 @@
 
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useEditStore } from '../../state/store';
-import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
-import { useUpdatePost } from '../../hooks/Posts/useUpdatePost';
-import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
-import { useFetchTags } from '../../hooks/Posts/useFetchTags';
 
+import { useEditStore } from '../../state/store';
+import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
+import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
+import { useFetchTags } from '../../hooks/Posts/useFetchTags';
+import { useUpdatePost } from '../../hooks/Posts/useUpdatePost';
 import { useImageDragAndDrop } from '../../hooks/Posts/useImageDragAndDrop';
 import { usePostUpdateEffect } from '../../hooks/Posts/usePostUpdateEffect';
 
@@ -26,8 +26,9 @@ const DraggableImage = ({ id, imagePath, moveImage }) => {
 
 const Edit = () => {
     useUserAuthentication();
+
     const { id } = useParams();
-    const { title, setTitle, images, setImages, comment, setComment, error, setError, selectedTags, setSelectedTags } = useEditStore()
+    const { title, setTitle, images, setImages, comment, setComment, error, setError, selectedTags, setSelectedTags } = useEditStore();
     const { data: post } = useFetchSinglePost(id);
     const { data: tags } = useFetchTags();
 
@@ -47,8 +48,7 @@ const Edit = () => {
 
     usePostUpdateEffect(post, setTitle, setImages, setComment, setSelectedTags);
 
-    const { handleSubmit, ...updatePost } =
-        useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment, selectedTags);
+    const { handleSubmit, ...updatePost } = useUpdatePost(id, setTitle, setImages, setComment, setError, title, images, comment, selectedTags);
 
     return (
         <div>
