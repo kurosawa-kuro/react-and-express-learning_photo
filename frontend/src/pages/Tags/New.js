@@ -5,6 +5,7 @@ import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
 import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
 import useStore from '../../state/store.js'; // import the store
+import { Link } from 'react-router-dom';
 
 const TagNew = () => {
     // get the state and state-updating functions from the store
@@ -63,7 +64,8 @@ const TagNew = () => {
                                     </form>
                                 ) : (
                                     <>
-                                        {tag.name}
+                                        {/* ここでLinkを使ってリンクを作成 */}
+                                        <Link to={`/tag/${tag.id}`}>{tag.name}</Link>
                                         <button onClick={() => handleEdit(tag)}>Edit</button>
                                         <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>
                                     </>
