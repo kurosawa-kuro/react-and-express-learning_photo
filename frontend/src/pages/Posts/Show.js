@@ -1,22 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
+import { useImageModal } from '../../hooks/Posts/useImageModal';
 
 const Show = () => {
     const { id } = useParams();
     const { data, isLoading, isError } = useFetchSinglePost(id);
-    const [selectedImage, setSelectedImage] = useState(null);
+    const { selectedImage, openModal, closeModal } = useImageModal();
 
     if (isLoading) return <div>Loading...</div>;
     if (isError) return <div>Error occurred while fetching the post.</div>;
-
-    const openModal = (image) => {
-        setSelectedImage("http://localhost:8080/uploads/" + image.imagePath);
-    };
-
-    const closeModal = () => {
-        setSelectedImage(null);
-    };
 
     return (
         <div>
