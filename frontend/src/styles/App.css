@@ -86,6 +86,10 @@
   overflow-wrap: break-word;
 }
 
+.photo-list {
+  width: 300px;
+}
+
 .edit-images-list {
   display: flex;
   flex-direction: column;

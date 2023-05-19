@@ -16,7 +16,7 @@ const Show = () => {
             <h1>Show</h1>
             <h2>{data.title}</h2>
             <div className='single-photo-info'>
-                <div>
+                <div className='photo-list'>
                     {data.images && data.images.map((image, index) => (
                         <img
                             key={index}
@@ -32,12 +32,11 @@ const Show = () => {
 
             {selectedImage && (
                 <div style={{
-                    position: 'fixed', top: '40px', left: '400px', width: '600px', height: '600px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)'
+                    position: 'fixed', top: '40px', right: '1050px', width: '600px', height: '600px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center'
                 }}
                     onClick={closeModal}>
-                    <img src={selectedImage} style={{ width: '200%', height: 'auto' }} alt="Selected" />
+                    <img src={selectedImage} style={{ width: '600px', height: 'auto' }} alt="Selected" />
                 </div>
             )}
         </div>
