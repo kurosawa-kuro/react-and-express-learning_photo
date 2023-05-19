@@ -46,9 +46,13 @@ export const createTag = async ({ name }) => {
 };
 
 export const fetchTags = async () => {
-    console.log('fetchTags');
     const apiClient = getApiClient();
     const { data } = await apiClient.get("/tags");
-    console.log('fetchTags: data: ', data);
     return data;
+};
+
+export const deleteTag = async (id) => {
+    const apiClient = getApiClient();
+    const response = await apiClient.delete(`/tags/${id}`);
+    return response.data;
 };

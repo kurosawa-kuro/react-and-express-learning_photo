@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useCreateTag } from '../../hooks/Tags/useCreateTag.js';
 import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
+import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js'; // Add this line
 
 const TagNew = () => {
     const [name, setName] = useState('');
@@ -10,6 +11,7 @@ const TagNew = () => {
 
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
+    const deleteTag = useDeleteTag(); // Add this line
 
     return (
         <div>
@@ -27,7 +29,10 @@ const TagNew = () => {
             {tagList && (
                 <ul>
                     {tagList.data.map(tag => (
-                        <li key={tag.id}>{tag.name}</li>
+                        <li key={tag.id}>
+                            {tag.name}
+                            <button onClick={() => deleteTag.mutate(tag.id)}>Delete</button>  {/* Add this line */}
+                        </li>
                     ))}
                 </ul>
             )}
