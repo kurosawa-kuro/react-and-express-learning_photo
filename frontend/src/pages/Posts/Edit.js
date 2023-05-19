@@ -1,6 +1,6 @@
 // path frontend\src\pages\Posts\Edit.js
 
-import React, { useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEditStore } from '../../state/store';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
@@ -45,7 +45,6 @@ const Edit = () => {
         setImages(updatedImages);
     };
 
-    console.log({ post });
     usePostUpdateEffect(post, setTitle, setImages, setComment, setSelectedTags);
 
     const { handleSubmit, ...updatePost } =
