@@ -199,20 +199,20 @@ h3 {
 }
 
 h1 {
-  font-size: 48px;
+  font-size: 48px !important;
   color: var(--primary-text-color);
   margin-bottom: 20px;
 }
 
 h2 {
-  font-size: 36px;
+  font-size: 36px !important;
   color: var(--secondary-text-color);
   line-height: 1.333;
   margin-bottom: 10px;
 }
 
 h3 {
-  font-size: 24px;
+  font-size: 24px !important;
   color: var(--secondary-text-color);
 }
 

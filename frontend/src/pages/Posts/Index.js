@@ -3,6 +3,7 @@
 // React and related packages
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/App.css';
 
 // Hooks
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';
