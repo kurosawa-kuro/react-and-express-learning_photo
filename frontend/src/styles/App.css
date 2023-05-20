@@ -78,7 +78,7 @@
 .single-photo-info img {
   height: 300px;
   width: 300px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .single-photo-info p {

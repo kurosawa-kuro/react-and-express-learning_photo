@@ -41,7 +41,7 @@ const Home = () => {
                         )}
                         <div className='post-description'>
                             <p>{post.comment}</p>
-                            <p>{post.updatedAt}</p>
+                            <p>{new Intl.DateTimeFormat('ja-JP', { year: 'numeric', month: 'long', day: '2-digit', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Tokyo' }).format(new Date(post.updatedAt))}</p>
                         </div>
                     </div>
                 </div>

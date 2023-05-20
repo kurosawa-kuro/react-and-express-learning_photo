@@ -32,11 +32,11 @@ const Show = () => {
 
             {selectedImage && (
                 <div style={{
-                    position: 'fixed', top: '40px', right: '1050px', width: '600px', height: '600px',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center'
+                    position: 'fixed', top: '0', left: '0', width: '450px', height: '600px',
+                    display: 'flex', alignItems: 'center'
                 }}
                     onClick={closeModal}>
-                    <img src={selectedImage} style={{ width: '600px', height: 'auto' }} alt="Selected" />
+                    <img src={selectedImage} style={{ width: '200%', height: 'auto' }} alt="Selected" />
                 </div>
             )}
         </div>
