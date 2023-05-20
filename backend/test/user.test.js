@@ -3,14 +3,16 @@
 import request from "supertest";
 import app from "../src/app/index.js";
 
+
 describe("POST /register", () => {
     it("should create a new user", async () => {
         const newUser = {
-            name: "aaa",
+            name: "bbb",
             password: "aaa",
-            email: "aaa@aaa.aaa",
+            email: "bbb@aaa.aaa",
             isAdmin: false,
         };
+
 
         const response = await request(app)
             .post("/register")
