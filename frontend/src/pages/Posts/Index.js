@@ -8,10 +8,10 @@ import { Link } from 'react-router-dom';
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';
 import { useSearch } from '../../hooks/useSearch';
 import { useFlashMessage } from '../../hooks/useFlashMessage';
-import { useUserAuthentication } from '../../hooks/Auth/useUserAuthentication';
+import { useAuthFromLocalStorage } from '../../hooks/Auth/useAuthFromLocalStorage';
 
 export const Home = () => {
-    const isAuthenticated = useUserAuthentication();
+    const isAuthenticated = useAuthFromLocalStorage();
     const flashMessage = useFlashMessage();
     const { search, handleSearchChange } = useSearch();
     const { data, isLoading, isError, handlePrevious, handleNext, currentPage, totalPages } =

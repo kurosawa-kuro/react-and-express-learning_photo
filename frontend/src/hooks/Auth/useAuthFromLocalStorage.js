@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUserStore } from '../../state/store'
 
-export const useUserAuthentication = () => {
+export const useAuthFromLocalStorage = () => {
     const navigate = useNavigate();
     const { setUser } = useUserStore();
 

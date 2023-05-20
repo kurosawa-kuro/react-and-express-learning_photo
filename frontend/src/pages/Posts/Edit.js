@@ -7,7 +7,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import update from 'immutability-helper';
 
 import { useEditStore } from '../../state/store';
-import { useUserAuthentication } from '../../hooks/Auth/useUserAuthentication';
+import { useAuthFromLocalStorage } from '../../hooks/Auth/useAuthFromLocalStorage';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
 import { useFetchTags } from '../../hooks/Posts/useFetchTags';
 import { useUpdatePost } from '../../hooks/Posts/useUpdatePost';
@@ -25,7 +25,7 @@ const DraggableImage = ({ id, imagePath, moveImage }) => {
 };
 
 export const Edit = () => {
-    useUserAuthentication();
+    useAuthFromLocalStorage();
 
     const { id } = useParams();
     const { title, setTitle, images, setImages, comment, setComment, error, setError, selectedTags, setSelectedTags } = useEditStore();

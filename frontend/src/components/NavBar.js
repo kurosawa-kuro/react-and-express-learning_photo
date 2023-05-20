@@ -4,10 +4,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useUserStore } from '../state/store';
 import { useLogout } from '../hooks/Auth/useLogout';
-import { useUserAuthentication } from '../hooks/Auth/useUserAuthentication';
+import { useAuthFromLocalStorage } from '../hooks/Auth/useAuthFromLocalStorage';
 
 export const NavBar = () => {
-    useUserAuthentication();
+    useAuthFromLocalStorage();
     const logout = useLogout();
     const { user } = useUserStore();
 
