@@ -10,10 +10,9 @@ export const NavBar = () => {
     const logout = useLogout();
 
     useEffect(() => {
-        // Get the user from localStorage
-        const user = localStorage.getItem('user');
+        const user = JSON.parse(localStorage.getItem('user'));
         if (user) {
-            setUser(JSON.parse(user));
+            setUser(user);
         }
     }, [setUser]);
 
