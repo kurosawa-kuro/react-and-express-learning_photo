@@ -1,11 +1,14 @@
 // frontend\src\App.js
 
+// Import packages
 import React from 'react';
-import "./styles/reset.css";
-import "./styles/App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+// Import components
 import { NavBar } from "./components/NavBar";
 import { Footer } from "./components/Footer";
+
+// Import pages
 import { Home } from "./pages/Posts/Index";
 import { Show } from "./pages/Posts/Show";
 import { New } from "./pages/Posts/New";
@@ -16,7 +19,11 @@ import { Information } from "./pages/Information";
 import { Registration } from "./pages/Auth/Register";
 import { Login } from "./pages/Auth/Login";
 
+// Import styles
+import "./styles/reset.css";
+import "./styles/App.css";
 
+// App component
 const App = () => {
   return (
     <BrowserRouter>
@@ -42,4 +49,3 @@ const App = () => {
 };
 
 export default App;
-
