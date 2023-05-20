@@ -15,9 +15,9 @@ const New = () => {
         <div>
             <h1>Write</h1>
             <form onSubmit={handleSubmit}>
-                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" required />
+                <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
                 <input type="file" multiple onChange={(e) => setImages([...images, ...e.target.files])} required />
-                <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Comment" required />
+                <textarea value={comment} onChange={(e) => setComment(e.target.value)} placeholder="Comment" />
 
                 {tags && (
                     <select multiple onChange={(e) => setSelectedTags(Array.from(e.target.selectedOptions, option => option.value))}>

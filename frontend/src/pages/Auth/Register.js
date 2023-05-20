@@ -6,7 +6,8 @@ import '../../styles/App.css';
 
 const Registration = () => {
     const { setName, setEmail, setPassword, handleSubmit, error, isLoading, isSuccess } = useRegisterUser();
-
+    console.log('Registration.js: error', error);
+    console.log('Registration.js: error.name', error.name);
     return (
         <div className="container">
             <h1>Registration</h1>
@@ -38,7 +39,13 @@ const Registration = () => {
                         placeholder="Enter your password"
                     />
                 </div>
-                {error && <div className="error">{error}</div>}
+                {error && (
+                    <div className="error">
+                        {error.issues.map((issue, index) => (
+                            <p key={index}>{issue.message}</p>
+                        ))}
+                    </div>
+                )}
                 <button type="submit" disabled={isLoading}>Submit</button>
             </form>
             {isSuccess && <div>User successfully registered!</div>}

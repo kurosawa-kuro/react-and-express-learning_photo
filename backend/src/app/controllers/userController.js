@@ -3,6 +3,13 @@
 import asyncHandler from "express-async-handler";
 import { createUser, loginUser, getUserByEmail, getUserById } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
+import { z } from 'zod';
+
+const registerSchema = z.object({
+    name: z.string().min(3, "名前を3文字以上に設定してください。"),
+    password: z.string().min(3, "パスワードを3文字以上に設定してください。"),
+    email: z.string().email("有効なEメールアドレスを入力してください。"),
+});
 
 const generateToken = (user) => {
     return jwt.sign(
@@ -24,11 +31,15 @@ const createUserResponse = (user, token) => {
 };
 
 export const registerUserController = asyncHandler(async (req, res) => {
-    const { name, password, email, isAdmin } = req.body;
+    // Validate the request body
+    const validatedData = registerSchema.safeParse(req.body);
 
-    if (!name || !password || !email) {
-        return res.status(400).json({ error: "Name, password, and email are required" });
+    // Check if validation failed
+    if (!validatedData.success) {
+        return res.status(400).json({ error: validatedData.error });
     }
+
+    const { name, password, email, isAdmin } = validatedData.data;
 
     const existingUser = await getUserByEmail(email);
     if (existingUser) {
