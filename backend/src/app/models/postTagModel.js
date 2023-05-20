@@ -13,6 +13,8 @@ export const getAllPostTags = async () => {
 };
 
 export const createNewPostTag = async (postTagData) => {
+    console.log(postTagData);
+    console.log("postTagData.tagId", postTagData.tagId);
     const newPostTag = await db.postTag.create({
         data: postTagData,
     });

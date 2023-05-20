@@ -22,6 +22,27 @@ export const getAllPostsController = asyncHandler(async (req, res) => {
     });
 });
 
+// Helper function to create Post Images
+const createPostImagesForNewPost = async (files, postId) => {
+    const postImages = files.map((file, index) => ({
+        postId: postId,
+        imagePath: file.filename,
+        displayOrder: index + 1,
+    }));
+
+    await createPostImages(postImages);
+};
+
+// Helper function to create Post Tags
+const createPostTagsForNewPost = async (tags, postId) => {
+    const postTags = tags.map((tag) => ({
+        postId: postId,
+        tagId: parseInt(tag),
+    }));
+
+    await Promise.all(postTags.map((postTag) => createNewPostTag(postTag)));
+};
+
 export const createNewPostController = asyncHandler(async (req, res) => {
     // Extract and remove tags from the request body
     const { tags: rawTags, ...postData } = req.body;
@@ -33,23 +54,17 @@ export const createNewPostController = asyncHandler(async (req, res) => {
     const newPost = await createNewPost(postData);
 
     // Create the array of image data and save them
-    const postImages = req.files.map((file, index) => ({
-        postId: newPost.id,
-        imagePath: file.filename,
-        displayOrder: index + 1,
-    }));
-    await createPostImages(postImages);
+    await createPostImagesForNewPost(req.files, newPost.id);
 
     // Create the array of tag data and save them
-    const postTags = tags.map((tag) => ({
-        postId: newPost.id,
-        tagId: parseInt(tag),
-    }));
-    await Promise.all(postTags.map((postTag) => createNewPostTag(postTag)));
+    if (tags[0] !== undefined) {
+        await createPostTagsForNewPost(tags, newPost.id);
+    }
 
     // Return the successful response
     res.status(201).json({ message: 'Post created successfully', data: newPost });
 });
+
 
 
 export const updatePostController = asyncHandler(async (req, res) => {
