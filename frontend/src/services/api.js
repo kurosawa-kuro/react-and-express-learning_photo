@@ -2,69 +2,52 @@
 
 import { getApiClient } from './apiClient';
 
-export const registerUser = async ({ name, password, email }) => {
+const callApi = async (method, url, data) => {
     const apiClient = getApiClient();
-    const { data } = await apiClient.post("/register", { name, password, email });
-    return data;
-};
-
-export const loginUser = async ({ email, password }) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.post("/login", { email, password });
-    return data;
-};
-
-export const createPost = async (formData) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.post("/posts", formData);
-    return data;
-};
-
-export const fetchPosts = async (page = 1, search = '') => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.get(`/posts?page=${page}&search=${search}`);
-    return data;
-};
-
-export const fetchSinglePost = async (id) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.get(`/posts/${id}`);
-    return data;
-};
-
-export const updatePost = async (id, formData) => {
-    console.log("updatePost")
-    const apiClient = getApiClient();
-    const { data } = await apiClient.put(`/posts/${id}`, formData);
-    return data;
-};
-
-export const createTag = async ({ name }) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.post("/tags", { name });
-    return data;
-};
-
-export const fetchTags = async () => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.get("/tags");
-    return data;
-};
-
-export const deleteTag = async (id) => {
-    const apiClient = getApiClient();
-    const response = await apiClient.delete(`/tags/${id}`);
+    const response = await apiClient[method](url, data);
     return response.data;
 };
 
-export const updateTag = async ({ id, name }) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.put(`/tags/${id}`, { name });
-    return data;
+export const registerUser = async (data) => {
+    return await callApi("post", "/register", data);
+};
+
+export const loginUser = async (data) => {
+    return await callApi("post", "/login", data);
+};
+
+export const createPost = async (formData) => {
+    return await callApi("post", "/posts", formData);
+};
+
+export const fetchPosts = async (page = 1, search = '') => {
+    return await callApi("get", `/posts?page=${page}&search=${search}`);
+};
+
+export const fetchSinglePost = async (id) => {
+    return await callApi("get", `/posts/${id}`);
+};
+
+export const updatePost = async (id, formData) => {
+    return await callApi("put", `/posts/${id}`, formData);
+};
+
+export const createTag = async (data) => {
+    return await callApi("post", "/tags", data);
+};
+
+export const fetchTags = async () => {
+    return await callApi("get", "/tags");
+};
+
+export const deleteTag = async (id) => {
+    return await callApi("delete", `/tags/${id}`);
+};
+
+export const updateTag = async (data) => {
+    return await callApi("put", `/tags/${data.id}`, data);
 };
 
 export const fetchPostsByTag = async (tagId, page = 1) => {
-    const apiClient = getApiClient();
-    const { data } = await apiClient.get(`/tags/${tagId}?page=${page}`);
-    return data;
+    return await callApi("get", `/tags/${tagId}?page=${page}`);
 };
