@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useFetchSinglePost } from '../../hooks/Posts/useFetchSinglePost';
 import { useImageModal } from '../../hooks/Posts/useImageModal';
 
-const Show = () => {
+export const Show = () => {
     const { id } = useParams();
     const { data, isLoading, isError } = useFetchSinglePost(id);
     const { selectedImage, openModal, closeModal } = useImageModal();
@@ -44,5 +44,3 @@ const Show = () => {
         </div>
     );
 };
-
-export default Show;

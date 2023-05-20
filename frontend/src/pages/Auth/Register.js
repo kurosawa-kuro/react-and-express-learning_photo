@@ -4,7 +4,7 @@ import React from 'react';
 import { useRegisterUser } from '../../hooks/Auth/useRegisterUser';
 import '../../styles/App.css';
 
-const Registration = () => {
+export const Registration = () => {
     const { setName, setEmail, setPassword, handleSubmit, error, isLoading, isSuccess } = useRegisterUser();
     console.log('Registration.js: error', error);
     console.log('Registration.js: error.name', error.name);
@@ -52,5 +52,3 @@ const Registration = () => {
         </div>
     );
 };
-
-export default Registration;

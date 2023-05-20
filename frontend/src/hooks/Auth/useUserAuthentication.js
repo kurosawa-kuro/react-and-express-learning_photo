@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const useUserAuthentication = () => {
+export const useUserAuthentication = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
 
@@ -18,5 +18,3 @@ const useUserAuthentication = () => {
 
     return isAuthenticated;
 };
-
-export default useUserAuthentication;

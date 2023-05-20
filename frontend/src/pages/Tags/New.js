@@ -9,7 +9,7 @@ import { useFetchTags } from '../../hooks/Tags/useFetchTags.js';
 import { useDeleteTag } from '../../hooks/Tags/useDeleteTag.js';
 import { useUpdateTag } from '../../hooks/Tags/useUpdateTag.js';
 
-const TagNew = () => {
+export const TagNew = () => {
     const { name, setName, editName, setEditName, setEditTagId, editTagId, error, setError } = useEditStore();
     const { handleSubmit, ...createTag } = useCreateTag(setName, setError, name);
     const { data: tagList, isLoading: tagsLoading, isError: tagsError } = useFetchTags();
@@ -58,5 +58,3 @@ const TagNew = () => {
         </div>
     );
 };
-
-export default TagNew;

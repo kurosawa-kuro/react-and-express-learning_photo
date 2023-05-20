@@ -4,7 +4,7 @@ import React from 'react';
 import { useLoginUser } from '../../hooks/Auth/useLoginUser';
 import '../../styles/App.css';
 
-const Login = () => {
+export const Login = () => {
     const { email, password, error, setEmail, setPassword, handleSubmit, isLoading } = useLoginUser();
 
     return (
@@ -40,4 +40,3 @@ const Login = () => {
     );
 };
 
-export default Login;

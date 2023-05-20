@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const Information = () => {
+export const Information = () => {
     return (
         <div>
             <h1>Information</h1>
@@ -12,5 +12,3 @@ const Information = () => {
         </div>
     );
 };
-
-export default Information;

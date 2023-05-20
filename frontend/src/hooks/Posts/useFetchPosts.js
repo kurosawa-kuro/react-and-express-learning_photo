@@ -1,7 +1,7 @@
 // frontend\src\hooks\Posts\useFetchPosts.js
 
 import { useQuery } from '@tanstack/react-query';
-import usePagination from '../usePagination';
+import { usePagination } from '../usePagination';
 import { fetchPosts } from '../../services/api';
 
 export const useFetchPosts = (isAuthenticated, search) => {

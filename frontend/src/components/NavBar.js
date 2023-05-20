@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from '../state/store';
 
-const NavBar = () => {
+export const NavBar = () => {
     const navigate = useNavigate();
     const { user, setUser } = useUserStore()
 
@@ -82,5 +82,3 @@ const NavBar = () => {
         </nav>
     );
 };
-
-export default NavBar;

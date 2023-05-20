@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 // Hooks
 import { useFetchPosts } from '../../hooks/Posts/useFetchPosts';
 import { useSearch } from '../../hooks/useSearch';
-import useFlashMessage from '../../hooks/useFlashMessage';
-import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
+import { useFlashMessage } from '../../hooks/useFlashMessage';
+import { useUserAuthentication } from '../../hooks/Auth/useUserAuthentication';
 
-const Home = () => {
+export const Home = () => {
     const isAuthenticated = useUserAuthentication();
     const flashMessage = useFlashMessage();
     const { search, handleSearchChange } = useSearch();
@@ -53,5 +53,3 @@ const Home = () => {
         </div>
     );
 };
-
-export default Home;

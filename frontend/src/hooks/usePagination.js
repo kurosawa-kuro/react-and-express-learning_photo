@@ -2,11 +2,8 @@
 
 import { usePagingStore } from '../state/store'
 
-const usePagination = () => {
+export const usePagination = () => {
     const { currentPage, setCurrentPage, totalPages, setTotalPages } = usePagingStore()
-
 
     return { currentPage, setCurrentPage, totalPages, setTotalPages };
 };
-
-export default usePagination;

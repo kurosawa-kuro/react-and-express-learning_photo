@@ -4,17 +4,18 @@ import React from 'react';
 import "./styles/reset.css";
 import "./styles/App.css";
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
-import Home from "./pages/Posts/Index";
-import Show from "./pages/Posts/Show";
-import New from "./pages/Posts/New";
-import Edit from "./pages/Posts/Edit";
-import TagNew from "./pages/Tags/New";
-import Information from "./pages/Information";
-import Register from "./pages/Auth/Register";
-import Login from "./pages/Auth/Login";
-import TagPosts from './pages/Posts/TagPosts';
+import { NavBar } from "./components/NavBar";
+import { Footer } from "./components/Footer";
+import { Home } from "./pages/Posts/Index";
+import { Show } from "./pages/Posts/Show";
+import { New } from "./pages/Posts/New";
+import { Edit } from "./pages/Posts/Edit";
+import { TagNew } from "./pages/Tags/New";
+import { TagPosts } from './pages/Posts/TagPosts';
+import { Information } from "./pages/Information";
+import { Registration } from "./pages/Auth/Register";
+import { Login } from "./pages/Auth/Login";
+
 
 const App = () => {
   return (
@@ -30,7 +31,7 @@ const App = () => {
             <Route path="/tag/new" element={<TagNew />} />
             <Route path="/tag/:tagId" element={<TagPosts />} />
             <Route path="/information" element={<Information />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Registration />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </div>

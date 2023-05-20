@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useFlashMessageStore } from '../state/store'
 
-const useFlashMessage = (timeout = 3000) => {
+export const useFlashMessage = (timeout = 3000) => {
     const { flashMessage, setFlashMessage } = useFlashMessageStore()
 
     useEffect(() => {
@@ -19,5 +19,3 @@ const useFlashMessage = (timeout = 3000) => {
 
     return flashMessage; // return the flashMessage state
 };
-
-export default useFlashMessage;

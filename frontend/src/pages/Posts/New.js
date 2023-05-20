@@ -3,9 +3,9 @@
 import React from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';
 import { useFetchTags } from '../../hooks/Posts/useFetchTags';
-import useUserAuthentication from '../../hooks/Auth/useUserAuthentication';
+import { useUserAuthentication } from '../../hooks/Auth/useUserAuthentication';
 
-const New = () => {
+export const New = () => {
     useUserAuthentication();
     const { title, setTitle, images, setImages, comment, setComment, selectedTags, setSelectedTags, error, handleSubmit, ...createPost } =
         useCreatePost();
@@ -36,6 +36,3 @@ const New = () => {
         </div>
     );
 };
-
-export default New;
-

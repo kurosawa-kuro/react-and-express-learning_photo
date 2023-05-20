@@ -4,7 +4,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useFetchPostsByTag } from '../../hooks/Posts/useFetchPostsByTag';
 
-const TagPosts = () => {
+export const TagPosts = () => {
     const { tagId } = useParams();
     const { data, isLoading, isError, handlePrevious, handleNext, currentPage, totalPages } =
         useFetchPostsByTag(parseInt(tagId));
@@ -35,5 +35,3 @@ const TagPosts = () => {
         </div>
     );
 };
-
-export default TagPosts;

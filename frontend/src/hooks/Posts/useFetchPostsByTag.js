@@ -1,7 +1,7 @@
 // frontend\src\hooks\Posts\useFetchSinglePost.js
 
 import { useQuery } from '@tanstack/react-query';
-import usePagination from '../usePagination';
+import { usePagination } from '../usePagination';
 import { fetchPostsByTag } from '../../services/api';
 
 export const useFetchPostsByTag = (tagId) => {
