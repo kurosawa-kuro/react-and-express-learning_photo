@@ -1,4 +1,4 @@
-// Path: backend/src/app/routes/postsRoute.js
+// backend\src\app\routes\postsRoute.js
 
 import asyncHandler from "express-async-handler";
 import upload from "../middlewares/uploadMiddelware.js";

@@ -1,4 +1,4 @@
-// Path: backend/src/app/models/postTagModel.js
+// backend\src\app\models\postTagModel.js
 
 import { db } from "../../database/prisma/prismaClient.js";
 

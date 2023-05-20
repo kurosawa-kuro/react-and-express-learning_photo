@@ -1,4 +1,4 @@
-// path frontend\src\hooks\Posts\usePostUpdateEffect.js
+// frontend\src\hooks\Posts\usePostUpdateEffect.js
 
 import { useEffect } from 'react';
 

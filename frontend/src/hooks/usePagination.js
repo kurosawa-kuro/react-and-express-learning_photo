@@ -1,4 +1,4 @@
-// src/hooks/usePagination.js
+// frontend\src\hooks\usePagination.js
 
 import { usePagingStore } from '../state/store'
 

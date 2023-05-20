@@ -1,4 +1,4 @@
-// path: full-stack-basic\react-and-express-image_sns\frontend\src\hooks\useApiClient.js
+// frontend\src\services\apiClient.js
 
 import axios from "axios";
 

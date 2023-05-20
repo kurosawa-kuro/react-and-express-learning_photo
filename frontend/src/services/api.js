@@ -1,4 +1,4 @@
-// path frontend\src\services\api.js
+// frontend\src\services\api.js
 
 import { getApiClient } from './apiClient';
 

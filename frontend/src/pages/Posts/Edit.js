@@ -1,4 +1,4 @@
-// path frontend\src\pages\Posts\Edit.js
+// frontend\src\pages\Posts\Edit.js
 
 import React from 'react';
 import { useParams } from 'react-router-dom';

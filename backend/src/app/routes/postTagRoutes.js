@@ -1,4 +1,4 @@
-// Path: backend/src/app/routes/postTagRoutes.js
+// backend\src\app\routes\postTagRoutes.js
 
 import asyncHandler from "express-async-handler";
 import { authMiddleware } from "../middlewares/authMiddleware.js";

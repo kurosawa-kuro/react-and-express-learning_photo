@@ -1,4 +1,5 @@
-// src/hooks/useSearch.js
+// frontend\src\hooks\useSearch.js
+
 import { useSearchStore } from '../state/store';
 
 export const useSearch = () => {

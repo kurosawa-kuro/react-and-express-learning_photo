@@ -1,4 +1,4 @@
-// path backend\src\app\models\postImageModel.js
+// backend\src\app\models\postImageModel.js
 
 import { db } from "../../database/prisma/prismaClient.js";
 

@@ -1,4 +1,4 @@
-// path: backend\src\database\prisma\prismaClient.js
+// backend\src\database\prisma\prismaClient.js
 
 import { PrismaClient } from "@prisma/client";
 

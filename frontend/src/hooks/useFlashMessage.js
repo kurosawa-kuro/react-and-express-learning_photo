@@ -1,4 +1,4 @@
-// src/hooks/useFlashMessage.js
+// frontend\src\hooks\useFlashMessage.js
 
 import { useEffect } from 'react';
 import { useFlashMessageStore } from '../state/store'

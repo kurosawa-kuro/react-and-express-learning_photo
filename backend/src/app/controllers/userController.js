@@ -1,9 +1,9 @@
-// Path: backend/src/app/controllers/userController.js
+// backend\src\app\controllers\userController.js
 
 import asyncHandler from "express-async-handler";
-import { createUser, loginUser, getUserByEmail, getUserById } from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import { z } from 'zod';
+import { createUser, loginUser, getUserByEmail, getUserById } from "../models/userModel.js";
 
 const registerSchema = z.object({
     name: z.string().min(3, "名前を3文字以上に設定してください。"),

@@ -1,3 +1,5 @@
+// frontend\src\hooks\Posts\useImageModal.js
+
 import { useState } from 'react';
 
 export const useImageModal = () => {

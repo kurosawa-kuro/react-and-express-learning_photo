@@ -1,4 +1,4 @@
-// Path: backend/src/app/controllers/postController.js
+// backend\src\app\controllers\postController.js
 
 import asyncHandler from "express-async-handler";
 import { getPaginatedPosts, createNewPost, getTotalPosts, POSTS_PER_PAGE, updatePost, getSinglePost } from "../models/postModel.js";

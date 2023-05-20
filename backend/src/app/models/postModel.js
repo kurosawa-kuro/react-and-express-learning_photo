@@ -1,4 +1,5 @@
-import { json } from "express";
+// backend\src\app\models\postModel.js
+
 import { db } from "../../database/prisma/prismaClient.js";
 
 export const POSTS_PER_PAGE = 3;  // adjust this as needed

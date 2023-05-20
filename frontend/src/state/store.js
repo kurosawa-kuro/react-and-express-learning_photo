@@ -1,4 +1,4 @@
-// Path: frontend\src\state\store.js
+// frontend\src\state\store.js
 
 import { create } from 'zustand'
 

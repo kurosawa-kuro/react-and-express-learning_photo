@@ -1,4 +1,4 @@
-// Path: backend/src/app/models/userModel.js
+// backend\src\app\models\userModel.js
 
 import bcrypt from "bcryptjs";
 import { db } from "../../database/prisma/prismaClient.js";

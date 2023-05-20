@@ -1,4 +1,4 @@
-// Path: frontend\src\pages\Posts\New.js
+// frontend\src\pages\Posts\New.js
 
 import React from 'react';
 import { useCreatePost } from '../../hooks/Posts/useCreatePost';

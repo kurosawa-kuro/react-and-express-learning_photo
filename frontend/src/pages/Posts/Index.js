@@ -1,4 +1,4 @@
-// path frontend\src\pages\Posts\Index.js
+// frontend\src\pages\Posts\Index.js
 
 // React and related packages
 import React from 'react';

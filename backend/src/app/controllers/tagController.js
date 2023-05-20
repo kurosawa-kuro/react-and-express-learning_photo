@@ -1,4 +1,4 @@
-// Path: backend/src/app/controllers/tagController.js
+// backend\src\app\controllers\tagController.js
 
 import asyncHandler from "express-async-handler";
 import { getAllTags, getSingleTag, createNewTag, updateTag, deleteTag } from "../models/tagModel.js";

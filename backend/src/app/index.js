@@ -1,4 +1,5 @@
-// backend/src/app/index.js
+// backend\src\app\index.js
+
 import express from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";

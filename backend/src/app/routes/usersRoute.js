@@ -1,4 +1,4 @@
-// Path: backend/src/app/routes/usersRoute.js
+// backend\src\app\routes\usersRoute.js
 
 import asyncHandler from "express-async-handler";
 import { registerUserController, loginUserController, getUserController } from "../controllers/userController.js";

@@ -1,4 +1,4 @@
-// Path: backend/src/app/middlewares/authMiddleware.js
+// backend\src\app\middlewares\authMiddleware.js
 
 import jwt from "jsonwebtoken";
 

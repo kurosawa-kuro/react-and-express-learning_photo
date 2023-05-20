@@ -1,3 +1,5 @@
+// frontend\src\pages\Information.js
+
 import React from 'react';
 
 const Information = () => {

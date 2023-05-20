@@ -1,4 +1,4 @@
-// Path: backend/src/app/controllers/postTagController.js
+// backend\src\app\controllers\postTagController.js
 
 import asyncHandler from "express-async-handler";
 import { getAllPostTags, createNewPostTag, updatePostTag, deletePostTag } from "../models/postTagModel.js";
