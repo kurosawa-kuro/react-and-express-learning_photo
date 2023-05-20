@@ -30,6 +30,9 @@ describe("POST /register", () => {
             .post("/register")
             .send(newUser)
             .set("Accept", "application/json");
+        // console.log({ response });
+        const cookies = response.headers['set-cookie'];
+        console.log("cookies", cookies);
 
         // Assert
         expect(response.status).toBe(201);
