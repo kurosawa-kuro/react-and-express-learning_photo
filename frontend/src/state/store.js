@@ -1,6 +1,6 @@
 // Path: frontend\src\state\store.js
 
-import create from 'zustand'
+import { create } from 'zustand'
 
 // User関連の状態
 const useUserStore = create(set => ({
