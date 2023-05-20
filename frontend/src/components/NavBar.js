@@ -1,23 +1,13 @@
 // frontend\src\components\NavBar.js
 
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useUserStore } from '../state/store';
+import { useLogout } from '../hooks/Auth/useLogout';
 
 export const NavBar = () => {
-    const navigate = useNavigate();
-    const { user, setUser } = useUserStore()
-
-    const logout = (event) => {
-        event.preventDefault();
-
-        // Remove the token and user from localStorage
-        localStorage.removeItem('user');
-        setUser(null);
-
-        // Redirect the user to the login page
-        navigate('/login');
-    };
+    const { user, setUser } = useUserStore();
+    const logout = useLogout();
 
     useEffect(() => {
         // Get the user from localStorage
