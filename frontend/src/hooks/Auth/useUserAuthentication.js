@@ -2,14 +2,18 @@
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../../state/store'
 
 export const useUserAuthentication = () => {
     const navigate = useNavigate();
+    const { setUser } = useUserStore();
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
-        if (!user) {
+        if (user) {
+            setUser(user);
+        } else {
             navigate('/login');
         }
-    }, [navigate]);
+    }, [navigate, setUser]);
 };
