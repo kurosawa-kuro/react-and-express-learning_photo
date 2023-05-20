@@ -1,15 +1,21 @@
 // frontend\src\components\NavBar.js
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useUserStore } from '../state/store';
 import { useLogout } from '../hooks/Auth/useLogout';
-import { useAuthFromLocalStorage } from '../hooks/Auth/useAuthFromLocalStorage';
 
 export const NavBar = () => {
-    useAuthFromLocalStorage();
     const logout = useLogout();
-    const { user } = useUserStore();
+    const { user, setUser } = useUserStore();
+
+    useEffect(() => {
+        // Get the user from localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user) {
+            setUser(user);
+        }
+    }, [setUser]);
 
     return (
         <nav>
