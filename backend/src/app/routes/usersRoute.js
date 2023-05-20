@@ -1,7 +1,7 @@
 // backend\src\app\routes\usersRoute.js
 
 import asyncHandler from "express-async-handler";
-import { registerUserController, loginUserController, getUserController } from "../controllers/userController.js";
+import { registerUserController, loginUserController, getUserController, logoutUserController } from "../controllers/userController.js";
 import { authMiddleware } from "../middlewares/authMiddleware.js";
 
 const userRoutes = (app) => {
@@ -10,6 +10,8 @@ const userRoutes = (app) => {
 
     // Login a user
     app.post("/login", asyncHandler(loginUserController));
+
+    app.post("/logout", asyncHandler(logoutUserController));
 
     app.get("/me", authMiddleware, asyncHandler(getUserController));
 
