@@ -54,9 +54,6 @@ export const getTotalPosts = async (search) => {
 };
 
 export const createNewPost = async (postData) => {
-    console.log("--------- createNewPost ----------", postData)
-    console.log("--------- createNewPost postData.userId ----------", postData.userId)
-
     if (isNaN(parseInt(postData.userId))) {
         throw new Error('Invalid user ID');
     }
@@ -68,7 +65,6 @@ export const createNewPost = async (postData) => {
                 userId: parseInt(postData.userId),
             }
         });
-        console.log("--------- createNewPost ----------", newPost)
         return newPost;
     } catch (error) {
         console.error("Error creating new post:", error)

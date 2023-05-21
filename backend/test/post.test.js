@@ -57,7 +57,6 @@ describe("POST /posts", () => {
             .attach('images', imagePath, 'test-image.jpg')
             .set("Accept", "application/json")
             .set("Cookie", `token=${token}`);
-        console.log("should create a new post with images response", response.body);
 
         const postFromDb = await createNewPost(newPost);
 

@@ -44,22 +44,15 @@ const createPostTagsForNewPost = async (tags, postId) => {
 };
 
 export const createNewPostController = asyncHandler(async (req, res) => {
-    console.log("--------- createNewPostController ----------")
-    console.log("--------- req.body ----------", req.body)
-    console.log("--------- req.files ----------", req.files)
-    console.log("--------- req.user ----------", req.user)
     // Extract and remove tags from the request body
     const { tags: rawTags, userId, ...postData } = req.body;
 
     // Ensure tags is an array
     const tags = Array.isArray(rawTags) ? rawTags : [rawTags];
-    console.log("--------- rawTags ----------", rawTags)
-    console.log("--------- postData ----------", postData)
     postData.userId = req.user.id;
-    console.log("--------- postData.userId ----------", postData.userId)
+
     // Create the new post
     const newPost = await createNewPost({ ...postData });
-    console.log("◇◇◇ newPost ◇◇◇", newPost)
 
     // Create the array of image data and save them
     await createPostImagesForNewPost(req.files, newPost.id);
