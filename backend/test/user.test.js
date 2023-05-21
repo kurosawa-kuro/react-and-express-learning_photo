@@ -2,7 +2,7 @@
 
 import request from "supertest";
 import app from "../src/app/index.js";
-import { getUserByEmail } from "../src/app/models/userModel.js";
+import { getUserByEmail, createUser } from "../src/app/models/userModel.js";
 import { db } from "../src/database/prisma/prismaClient.js";
 
 let newUser;
@@ -68,10 +68,7 @@ describe("POST /login", () => {
         };
 
         // Register the user
-        await request(app)
-            .post("/register")
-            .send(newUser)
-            .set("Accept", "application/json");
+        await createUser(newUser);
     });
 
     it("should login a user", async () => {
