@@ -4,6 +4,12 @@ import app from "../src/app/index.js";
 import { getUserByEmail, createUser } from "../src/app/models/userModel.js";
 import { db } from "../src/database/prisma/prismaClient.js";
 
+const newUser = {
+    name: "Test User",
+    password: "test123",
+    email: "testuser@aaa.com"
+};
+
 describe("POST /register", () => {
     beforeEach(async () => {
         await db.user.deleteMany({});
@@ -14,12 +20,6 @@ describe("POST /register", () => {
     });
 
     it("should create a new user", async () => {
-        const newUser = {
-            name: "Test User",
-            password: "test123",
-            email: "testuser@aaa.com"
-        };
-
         const response = await request(app)
             .post("/register")
             .send(newUser)
@@ -49,13 +49,6 @@ describe("POST /register", () => {
 describe("POST /login", () => {
     beforeEach(async () => {
         await db.user.deleteMany({});
-
-        const newUser = {
-            name: "Test User",
-            password: "test123",
-            email: "testuser@aaa.com"
-        };
-
         await createUser(newUser);
     });
 
@@ -64,12 +57,6 @@ describe("POST /login", () => {
     });
 
     it("should login a user", async () => {
-        const newUser = {
-            name: "Test User",
-            password: "test123",
-            email: "testuser@aaa.com"
-        };
-
         const response = await request(app)
             .post("/login")
             .send({ email: newUser.email, password: newUser.password })
@@ -99,13 +86,6 @@ describe("POST /login", () => {
 describe("POST /logout", () => {
     beforeEach(async () => {
         await db.user.deleteMany({});
-
-        const newUser = {
-            name: "Test User",
-            password: "test123",
-            email: "testuser@aaa.com"
-        };
-
         await createUser(newUser);
     });
 
@@ -114,12 +94,6 @@ describe("POST /logout", () => {
     });
 
     it("should logout a user", async () => {
-        const newUser = {
-            name: "Test User",
-            password: "test123",
-            email: "testuser@aaa.com"
-        };
-
         const loginResponse = await request(app)
             .post("/login")
             .send({ email: newUser.email, password: newUser.password })
@@ -139,6 +113,15 @@ describe("POST /logout", () => {
 });
 
 describe("Auth Middleware Error Handling", () => {
+    beforeEach(async () => {
+        await db.user.deleteMany({});
+        await createUser(newUser);
+    });
+
+    afterEach(async () => {
+        await db.user.deleteMany({});
+    });
+
     it("should return 401 and an error message when an error occurs during token verification", async () => {
         // Mock an error during token verification
         jest.spyOn(jwt, "verify").mockImplementationOnce(() => {
