@@ -21,6 +21,7 @@ const newPost = {
 let token;
 
 beforeEach(async () => {
+    await db.postImage.deleteMany({});
     await db.post.deleteMany({});
     await db.user.deleteMany({});
 
@@ -34,6 +35,7 @@ beforeEach(async () => {
 });
 
 afterEach(async () => {
+    await db.postImage.deleteMany({});
     await db.post.deleteMany({});
     await db.user.deleteMany({});
 });
