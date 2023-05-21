@@ -3,14 +3,19 @@
 import request from "supertest";
 import app from "../src/app/index.js";
 import { createUser, getUserByEmail } from "../src/app/models/userModel.js";
-
-// Mock the getUserByEmail and createUser function
-jest.mock("../src/app/models/userModel.js", () => ({
-    getUserByEmail: jest.fn(),
-    createUser: jest.fn()
-}));
+import { db } from "../src/database/prisma/prismaClient.js";
 
 describe("POST /register", () => {
+    // Clean up the database before each test run
+    beforeEach(async () => {
+        await db.user.deleteMany({});
+    });
+
+    // Close the database connection after all tests have finished
+    afterAll(async () => {
+        await db.$disconnect();
+    });
+
     it("should create a new user", async () => {
         // Arrange
         const newUser = {
@@ -19,28 +24,29 @@ describe("POST /register", () => {
             email: "bbb@aaa.aaa"
         };
 
-        // Assuming there is no existing user with the same email
-        getUserByEmail.mockResolvedValue(null);
-
-        // Assuming user creation is successful and returns the created user
-        createUser.mockResolvedValue({ ...newUser, id: 1 });
-
         // Act
         const response = await request(app)
             .post("/register")
             .send(newUser)
             .set("Accept", "application/json");
-        // console.log({ response });
+        console.log("response.body", response.body);
+
         // const cookies = response.headers['set-cookie'];
         // console.log("cookies", cookies);
 
+        // Get the user from the database
+        const userFromDb = await getUserByEmail(newUser.email);
+
         // Assert
         expect(response.status).toBe(201);
-        expect(getUserByEmail).toHaveBeenCalledWith(newUser.email);
-        expect(createUser).toHaveBeenCalledWith(newUser);
+        expect(userFromDb).toMatchObject({
+            id: expect.any(Number),
+            name: newUser.name,
+            email: newUser.email,
+        });
         expect(response.body).toMatchObject({
             user: {
-                id: 1,
+                id: expect.any(Number),
                 name: newUser.name,
                 email: newUser.email,
             },
