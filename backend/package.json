@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest --config jest.config.cjs"
+    "test": "jest --runInBand --config jest.config.cjs --coverage"
   },
   "keywords": [],
   "author": "",

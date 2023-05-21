@@ -14,25 +14,29 @@ beforeEach(async () => {
 
 // Close the database connection after all tests have finished
 afterAll(async () => {
+    await db.user.deleteMany({});
     await db.$disconnect();
 });
 
 describe("POST /register", () => {
-    beforeEach(async () => {
+
+    it("should create a new user", async () => {
+
         // Set up a new user
         newUser = {
             name: "Test User",
             password: "test123",
             email: "testuser@aaa.com"
         };
-    });
 
-    it("should create a new user", async () => {
         // Act
         const response = await request(app)
             .post("/register")
             .send(newUser)
             .set("Accept", "application/json");
+        console.log("newUser", newUser);
+        console.log("POST /register should create a new user response.body", response.body);
+
 
         // Get the user from the database
         const userFromDb = await getUserByEmail(newUser.email);

@@ -3,3 +3,4 @@ backend/src/app/uploads/*
 uploads/*
 frontend/uploads/*
 node_modules/*
+backend/coverage/
