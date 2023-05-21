@@ -70,26 +70,36 @@ export const createNewPostController = asyncHandler(async (req, res) => {
 export const updatePostController = asyncHandler(async (req, res) => {
     const postId = parseInt(req.params.id);
 
+    console.log('◇◇◇ check1 ◇◇◇');
     if (isNaN(postId)) {
         throw new Error('Invalid post ID');
     }
 
+    console.log('◇◇◇ check2 ◇◇◇');
     const { images: imagesList, tags: tagsList, ...updatedPostData } = req.body;
 
-    if (isNaN(parseInt(updatedPostData.userId))) {
+    if (isNaN(parseInt(req.user.id))) {
         throw new Error('Invalid user ID');
     }
 
-    updatedPostData.userId = parseInt(updatedPostData.userId);
-
+    console.log('◇◇◇ check3 ◇◇◇');
+    updatedPostData.userId = parseInt(req.user.id);
+    console.log('◇◇◇ check4 ◇◇◇');
     const updatedPost = await updatePost(postId, updatedPostData);
-
+    console.log('◇◇◇ check5 updatedPost◇◇◇', updatedPost);
+    console.log('◇◇◇ check6 imagesList◇◇◇', imagesList);
     const postImages = imagesList.map((file) => ({
         postId: updatedPost.id,
         imagePath: file.image,
         displayOrder: parseInt(file.displayOrder),
     }));
+    try {
 
+    } catch (error) {
+        console.log('◇◇◇ check6 error◇◇◇', error);
+    }
+
+    console.log('◇◇◇ check7 ◇◇◇', postImages);
     await updatePostImages(postId, postImages);
 
     // Create the array of tag data and save them

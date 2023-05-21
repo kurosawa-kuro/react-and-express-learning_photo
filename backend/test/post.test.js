@@ -18,6 +18,8 @@ const newPost = {
     userId: 1,
 };
 
+const imagePath = path.join(__dirname, './fixtures', 'test-image.jpg');
+
 let token;
 
 beforeEach(async () => {
@@ -48,7 +50,7 @@ describe("POST /posts", () => {
     });
 
     it("should create a new post with images", async () => {
-        const imagePath = path.join(__dirname, './fixtures', 'test-image.jpg');
+
 
         const response = await request(app)
             .post("/posts")
@@ -80,3 +82,103 @@ describe("POST /posts", () => {
         });
     });
 });
+
+describe("GET /posts", () => {
+    it("should get paginated posts", async () => {
+        // create multiple posts for testing pagination
+        const post1 = { ...newPost, title: "Test Post 1" };
+        const post2 = { ...newPost, title: "Test Post 2" };
+        const post3 = { ...newPost, title: "Test Post 3" };
+        await createNewPost(post1);
+        await createNewPost(post2);
+        const createdPost = await createNewPost(post3);
+
+        const response = await request(app)
+            .get(`/posts?page=1`)
+            .set("Accept", "application/json")
+            .set("Cookie", `token=${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toMatchObject({
+            currentPage: 1,
+            totalPages: expect.any(Number),
+            itemsPerPage: expect.any(Number),
+            data: expect.arrayContaining([
+                expect.objectContaining({
+                    id: expect.any(Number),
+                    title: expect.any(String),
+                    comment: expect.any(String),
+                    userId: newPost.userId,
+                }),
+            ]),
+        });
+
+        const postInResponse = response.body.data.find((post) => post.id === createdPost.id);
+        expect(postInResponse).toMatchObject({
+            id: createdPost.id,
+            title: post3.title,
+            comment: post3.comment,
+            userId: newPost.userId,
+        });
+    });
+});
+
+
+describe("GET /posts/:id", () => {
+    it("should get a single post by id", async () => {
+        const createdPost = await createNewPost(newPost);
+
+        const response = await request(app)
+            .get(`/posts/${createdPost.id}`)
+            .set("Accept", "application/json")
+            .set("Cookie", `token=${token}`);
+
+        expect(response.status).toBe(200);
+        expect(response.body).toMatchObject({
+            id: expect.any(Number),
+            title: newPost.title,
+            comment: newPost.comment,
+            userId: newPost.userId,
+        });
+    });
+});
+
+// describe("PUT /posts/:id", () => {
+//     it("should update a post with new data", async () => {
+//         const createdPost = await createNewPost(newPost);
+
+//         const updatedPostData = {
+//             title: "Updated Title",
+//             comment: "Updated Comment",
+//         };
+
+//         const response = await request(app)
+//             .put(`/posts/${createdPost.id}`)
+//             .field("title", updatedPostData.title)
+//             .field("comment", updatedPostData.comment)
+//             .attach('images', imagePath, 'test-image.jpg')
+//             .set("Accept", "application/json")
+//             .set("Cookie", `token=${token}`);
+//         console.log("should update a post with new data response", response.body);
+
+//         expect(response.status).toBe(200);
+//         expect(response.body).toMatchObject({
+//             message: 'Post updated successfully',
+//             data: {
+//                 id: expect.any(Number),
+//                 title: updatedPostData.title,
+//                 comment: updatedPostData.comment,
+//                 userId: newPost.userId,
+//             },
+//         });
+
+//         // Verify that the post was actually updated in the database
+//         const updatedPost = await db.post.findUnique({ where: { id: createdPost.id } });
+//         expect(updatedPost).toMatchObject({
+//             id: createdPost.id,
+//             title: updatedPostData.title,
+//             comment: updatedPostData.comment,
+//             userId: newPost.userId,
+//         });
+//     });
+// });
