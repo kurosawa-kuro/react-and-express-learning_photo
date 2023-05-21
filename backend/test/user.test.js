@@ -12,6 +12,7 @@ const newUser = {
 
 describe("POST /register", () => {
     beforeEach(async () => {
+        await db.post.deleteMany({});
         await db.user.deleteMany({});
     });
 
@@ -48,6 +49,7 @@ describe("POST /register", () => {
 
 describe("POST /login", () => {
     beforeEach(async () => {
+        await db.post.deleteMany({});
         await db.user.deleteMany({});
         await createUser(newUser);
     });
@@ -85,6 +87,7 @@ describe("POST /login", () => {
 
 describe("POST /logout", () => {
     beforeEach(async () => {
+        await db.post.deleteMany({});
         await db.user.deleteMany({});
         await createUser(newUser);
     });
