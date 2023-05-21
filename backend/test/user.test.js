@@ -1,4 +1,5 @@
 import request from "supertest";
+import jwt from 'jsonwebtoken';
 import app from "../src/app/index.js";
 import { getUserByEmail, createUser } from "../src/app/models/userModel.js";
 import { db } from "../src/database/prisma/prismaClient.js";
@@ -134,5 +135,19 @@ describe("POST /logout", () => {
         expect(response.body).toMatchObject({
             message: "User logged out"
         });
+    });
+});
+
+describe("Auth Middleware Error Handling", () => {
+    it("should return 401 and an error message when an error occurs during token verification", async () => {
+        // Mock an error during token verification
+        jest.spyOn(jwt, "verify").mockImplementationOnce(() => {
+            throw new Error("Token verification failed");
+        });
+
+        const response = await request(app).get("/protected");
+
+        expect(response.status).toBe(401);
+        expect(response.body).toEqual({ error: "unauthenticated" });
     });
 });
