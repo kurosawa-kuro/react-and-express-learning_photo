@@ -18,16 +18,18 @@ import { TagPosts } from './pages/Posts/TagPosts';
 import { Information } from "./pages/Information";
 import { Registration } from "./pages/Auth/Register";
 import { Login } from "./pages/Auth/Login";
+
 // Import styles
 import "./styles/reset.css";
 import "./styles/App.css";
 
+// App component
 const App = () => {
   return (
     <BrowserRouter>
-      <div className="min-h-screen flex flex-col">
+      <div className="app">
         <NavBar />
-        <div className="container mx-auto px-4">
+        <div className="container">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/post/new" element={<New />} />
