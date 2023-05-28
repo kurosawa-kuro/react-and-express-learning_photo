@@ -2,36 +2,38 @@
 
 import React from 'react';
 import { useRegisterUser } from '../../hooks/Auth/useRegisterUser';
-import '../../styles/App.css';
 
 export const Registration = () => {
     const { setName, setEmail, setPassword, handleSubmit, error, isLoading, isSuccess } = useRegisterUser();
 
     return (
-        <div className="container">
-            <h1>Registration</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
+        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100 px-4">
+            <h1 className="text-2xl font-bold mb-8">Registration</h1>
+            <form className="w-full max-w-md bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">Name:</label>
                     <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="text"
                         id="name"
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Enter your name"
                     />
                 </div>
-                <div>
-                    <label htmlFor="email">Email:</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">Email:</label>
                     <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="email"
                         id="email"
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Enter your email"
                     />
                 </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Password:</label>
                     <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         type="password"
                         id="password"
                         onChange={(e) => setPassword(e.target.value)}
@@ -39,15 +41,21 @@ export const Registration = () => {
                     />
                 </div>
                 {error && (
-                    <div className="error">
+                    <div className="bg-red-500 text-white font-bold py-2 px-4 rounded">
                         {error.issues.map((issue, index) => (
                             <p key={index}>{issue.message}</p>
                         ))}
                     </div>
                 )}
-                <button type="submit" disabled={isLoading}>Submit</button>
+                <button
+                    type="submit"
+                    disabled={isLoading}
+                    className={`mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200 ${isLoading ? 'opacity-50' : 'opacity-100'}`}
+                >
+                    Submit
+                </button>
             </form>
-            {isSuccess && <div>User successfully registered!</div>}
+            {isSuccess && <div className="bg-green-500 text-white font-bold py-2 px-4 rounded">User successfully registered!</div>}
         </div>
     );
 };
